@@ -7,7 +7,7 @@ SubProceso crearMision
 	Leer provincia
 	Escribir "Localidad / Area: "
 	Leer localidad
-	Escribir "Descripci髇: "
+	Escribir "Descripci贸n: "
 	Leer descripcion
 	Escribir "Nivel de urgencia [1] BAJA   [2] MEDIA   [3] ALTA "
 	Leer nivel
@@ -16,10 +16,10 @@ FinSubProceso
 Algoritmo coordinador
 	Definir opcion Como Entero
 	Escribir " ================ PANEL DE COORDINADOR ================ "
-	Escribir "[1] Crear misi髇      [2] Misiones Activas      [3] Asignar trabajadores      [4] Ver Stock      [5] Cerrar Sesi髇 "
+	Escribir "[1] Crear misi贸n      [2] Misiones Activas      [3] Asignar trabajadores      [4] Ver Stock      [5] Cerrar Sesi贸n "
 	Escribir "--------------------------------------------------------------------------------------------------------------------"
 	Repetir
-		Escribir "Seleccione una opci髇: "
+		Escribir "Seleccione una opci贸n: "
 		Leer opcion
 		Segun opcion Hacer
 			1:
@@ -31,9 +31,9 @@ Algoritmo coordinador
 			4:
 				Escribir "Ver Stock"
 			5:
-				Escribir "Cerrar Sesi髇"
+				Escribir "Cerrar Sesi贸n"
 			De Otro Modo:
-				Escribir "Opci髇 Incorrecta. Ingrese un n鷐ero v醠ido: "
+				Escribir "Opci贸n Incorrecta. Ingrese un n煤mero v谩lido: "
 		FinSegun
 	Hasta Que opcion = 5
 FinAlgoritmo
