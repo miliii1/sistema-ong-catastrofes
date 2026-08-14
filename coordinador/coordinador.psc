@@ -13,7 +13,7 @@ FinSubProceso
 
 Algoritmo coordinador
 	Definir opcion, nivel Como Entero
-	Definir tipoEmergencia, provincia, localidad, descripcion Como Cadena
+	Definir tipoEmergencia, provincia, localidad, descripcion, confirmacion Como Cadena
 	Dimension tipoEmergencia[20], provincia[20], localidad[20], descripcion[20], nivel[20]
 	Definir cantMisiones Como Entero
 	cantMisiones <- 1
