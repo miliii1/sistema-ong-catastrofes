@@ -1,5 +1,4 @@
-SubProceso crearMision
-	Definir tipoEmergencia, provincia, localidad, descripcion Como Cadena
+SubProceso crearMision(tipoEmergencia Por Referencia, provincia Por Referencia, localidad Por Referencia, descripcion Por Referencia)
 	Definir nivel Como Entero
 	Escribir "Tipo de emergencia: "
 	Leer tipoEmergencia
@@ -15,6 +14,10 @@ FinSubProceso
 
 Algoritmo coordinador
 	Definir opcion Como Entero
+	Definir tipoEmergencia, provincia, localidad, descripcion Como Cadena
+	Dimension tipoEmergencia[20], provincia[20], localidad[20], descripcion[20]
+	Definir cantMisiones Como Entero
+	cantMisiones <- 1
 	Escribir " ================ PANEL DE COORDINADOR ================ "
 	Escribir "[1] Crear misión      [2] Misiones Activas      [3] Asignar trabajadores      [4] Ver Stock      [5] Cerrar Sesión "
 	Escribir "--------------------------------------------------------------------------------------------------------------------"
@@ -23,7 +26,12 @@ Algoritmo coordinador
 		Leer opcion
 		Segun opcion Hacer
 			1:
-				crearMision()
+				Si cantMisiones <= 20 Entonces
+					crearMision(tipoEmergencia[cantMisiones], provincia[cantMisiones], localidad[cantMisiones], descripcion[cantMisiones])
+					cantMisiones <- cantMisiones + 1
+				SiNo
+					Escribir "Limites de misiones alcanzados"
+				FinSi
 			2:
 				Escribir "Misiones Activas"
 			3:
