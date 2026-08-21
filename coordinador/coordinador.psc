@@ -25,7 +25,7 @@ Algoritmo coordinador
 			2:
 				mostrarMisionesActivas(tipoEmergencia, provincia, nivel, cantMisiones)
 			3:
-				Escribir "Asignar trabajadores"
+				asignarTrabajadores(tipoEmergencia, provincia, nivel, cantMisiones)
 			4:
 				Escribir "Ver Stock"
 			5:
@@ -103,3 +103,58 @@ SubProceso mostrarMisionesActivas(tipoEmerge Por Referencia, prov Por Referencia
 	
 	Escribir "+------+------------------------------+---------------+-------------+"
 FinSubProceso
+
+// ======================================= Función para asignar Trabajador
+SubProceso asignarTrabajadores(tipoEmerge Por Referencia, prov Por Referencia, unNivel Por Referencia, totalMisiones Por Valor)
+	Definir idMision, idTrabajador, confirmacion Como Cadena
+	Definir j Como Entero
+	Escribir "Seleccione la misión a la que desea asignar trabajadores:"
+	Escribir "+------+-------------------------------+--------------------+----------+"
+	Escribir "| ID   | Tipo de emergencia           | Zona               | Urgencia |"
+	Escribir "+------+-------------------------------+--------------------+----------+"
+	
+	Si totalMisiones = 1 Entonces
+		Escribir "|  --  | No hay misiones registradas   | --                 | --       |"
+		Escribir "+------+-------------------------------+--------------------+----------+"
+	SiNo
+		Para j <- 1 Hasta totalMisiones - 1 Con Paso 1 Hacer
+			Escribir "| M0", j, "  | ", tipoEmerge[j], "                   | ", prov[j], "              | ", unNivel[j], "        |"
+		FinPara
+		Escribir "+------+-------------------------------+--------------------+----------+"
+		
+		Escribir ""
+		Escribir "Ingrese ID de la misión (ej: 1): "
+		Leer idMision
+		
+		Escribir ""
+		Escribir "LISTA DE TRABAJADORES DISPONIBLES"
+		Escribir "+------+--------------------+--------------------+------------+"
+		Escribir "| ID   | Nombre y Apellido  | Especialidad       | Estado     |"
+		Escribir "+------+--------------------+--------------------+------------+"
+		Escribir "| T01  | Pepito Suarez      | Logistica          | Disponible |"
+		Escribir "| T02  | Lionel Messi       | Medico             | Disponible |"
+		Escribir "| T03  | Carlitos Bala      | Rescate            | Disponible |"
+		Escribir "+------+--------------------+--------------------+------------+"
+		
+		Escribir ""
+		Escribir "Ingrese ID del trabajador a asignar (ej: T02): "
+		Leer idTrabajador
+		
+		Escribir ""
+		Escribir "+----------------------------------------------------------+"
+		Escribir "|                   CONFIRMAR ASIGNACION                   |"
+		Escribir "+----------------------------------------------------------+"
+		Escribir "| Mision : M0", idMision
+		Escribir "| Personal: ", idTrabajador
+		Escribir "+----------------------------------------------------------+"
+		Escribir "¿Confirmar asignación? (S/N): "
+		Leer confirmacion
+		
+		Si Mayusculas(confirmacion) = "S" Entonces
+			Escribir " [OK] Trabajador ", idTrabajador, " asignado a la misión M0", idMision
+		SiNo
+			Escribir " [X] Asignación cancelada."
+		FinSi
+	FinSi
+FinSubProceso
+	
