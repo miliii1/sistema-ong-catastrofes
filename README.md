@@ -93,8 +93,8 @@ organización durante una crisis.
 
 ## 👥 Equipo
 
-*Administrador: Pizarro,  Lautaro*,
-*Coordinador: González Jara, Milagros*,
-*Trabajador: Arumay, Nicolás*,
-*Colaborador: Iwanoff, Máximo*
+- *Administrador: Pizarro,  Lautaro*,
+- *Coordinador: González Jara, Milagros*,
+- *Trabajador: Arumay, Nicolás*,
+- *Colaborador: Iwanoff, Máximo*
 
