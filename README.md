@@ -88,7 +88,6 @@ organización durante una crisis.
 ## 🎯 Próximos pasos
 
 - [ ] Integrar los 4 módulos en un único menú principal
-- [ ] *[otros pendientes]*
 
 ---
 
