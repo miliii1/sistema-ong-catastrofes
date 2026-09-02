@@ -58,7 +58,7 @@ organización durante una crisis.
 
 ## 📊 Estado actual del proyecto
 
-> Actualizado al *[02/09/2026]*
+> Actualizado al *02/09/2026*
 
 - 🔄 **Coordinador** -- en desarrollo: Ver stock, Cerrar Sesión.
 - 🔄 **Administrador** -- en desarrollo: *[qué falta]*
@@ -94,8 +94,8 @@ organización durante una crisis.
 
 ## 👥 Equipo
 
-*Administrador: Pizarro,  Lautaro*
-*Coordinador: González Jara, Milagros*
-*Trabajador: Nicolás, *
+*Administrador: Pizarro,  Lautaro*,
+*Coordinador: González Jara, Milagros*,
+*Trabajador: Arumay, Nicolás*,
 *Colaborador: Iwanoff, Máximo*
 
