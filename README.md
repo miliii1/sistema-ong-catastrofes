@@ -63,7 +63,7 @@ organización durante una crisis.
 - 🔄 **Coordinador** -- en desarrollo: Ver stock, Cerrar Sesión.
 - 🔄 **Administrador** -- en desarrollo: *[qué falta]*
 - 🔄 **Trabajador** -- en desarrollo: Validación de misiones, y cambio de estado.
-- ⬜ **Colaborador** -- en desarrollo *[qué falta]*
+- ⬜ **Colaborador** -- en desarrollo: *FuncMostrarMisiónesPúblicas*
 
 <details>
 <summary>📋 Ver detalle del módulo Coordinador</summary>
