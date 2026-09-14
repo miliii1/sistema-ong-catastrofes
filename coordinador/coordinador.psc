@@ -1,39 +1,197 @@
-SubProceso crearMision
-	Definir tipoEmergencia, provincia, localidad, descripcion Como Cadena
-	Definir nivel Como Entero
-	Escribir "Tipo de emergencia: "
-	Leer tipoEmergencia
-	Escribir "Zona / Provincia: "
-	Leer provincia
-	Escribir "Localidad / Area: "
-	Leer localidad
-	Escribir "Descripci髇: "
-	Leer descripcion
-	Escribir "Nivel de urgencia [1] BAJA   [2] MEDIA   [3] ALTA "
-	Leer nivel
-FinSubProceso
-
 Algoritmo coordinador
-	Definir opcion Como Entero
-	Escribir " ================ PANEL DE COORDINADOR ================ "
-	Escribir "[1] Crear misi髇      [2] Misiones Activas      [3] Asignar trabajadores      [4] Ver Stock      [5] Cerrar Sesi髇 "
-	Escribir "--------------------------------------------------------------------------------------------------------------------"
+	Definir opcion, cantMisiones Como Entero
+	Definir tipoEmergencia, provincia, localidad, descripcion, confirmacion, nivel Como Cadena
+	Dimension tipoEmergencia[20], provincia[20], localidad[20], descripcion[20], nivel[20]
+	
+	cantMisiones <- 1
+	
 	Repetir
-		Escribir "Seleccione una opci髇: "
+		Borrar Pantalla 
+		Escribir " ================ PANEL DE COORDINADOR ================ "
+		Escribir "[1] Crear misi贸n      [2] Misiones Activas      [3] Asignar trabajadores      [4] Ver Stock      [5] Cerrar Sesi贸n "
+		Escribir "--------------------------------------------------------------------------------------------------------------------"
+		Escribir "Seleccione una opci贸n: "
 		Leer opcion
+		
 		Segun opcion Hacer
 			1:
-				crearMision()
+				Borrar Pantalla
+				Si cantMisiones <= 20 Entonces
+					crearMision(tipoEmergencia, provincia, localidad, descripcion, nivel, cantMisiones)
+					Si tipoEmergencia[cantMisiones] <> "" Entonces
+						cantMisiones <- cantMisiones + 1
+					FinSi
+				SiNo
+					Escribir "Limites de misiones alcanzados"
+					Escribir "Presione una tecla para continuar..."
+					Esperar Tecla
+				FinSi
 			2:
-				Escribir "Misiones Activas"
+				Borrar Pantalla
+				mostrarMisionesActivas(tipoEmergencia, provincia, nivel, cantMisiones)
+				Escribir ""
+				Escribir "Presione una tecla para volver al men煤..."
+				Esperar Tecla
 			3:
-				Escribir "Asignar trabajadores"
+				Borrar Pantalla
+				asignarTrabajadores(tipoEmergencia, provincia, nivel, cantMisiones)
+				Escribir ""
+				Escribir "Presione una tecla para volver al men煤..."
+				Esperar Tecla
 			4:
-				Escribir "Ver Stock"
+				Borrar Pantalla
+				Escribir "--- VER STOCK ---"
+				Escribir "M贸dulo en desarrollo."
+				Escribir ""
+				Escribir "Presione una tecla para volver al men煤..."
+				Esperar Tecla
 			5:
-				Escribir "Cerrar Sesi髇"
+				Borrar Pantalla
+				Escribir "Sistema cerrado correctamente."
 			De Otro Modo:
-				Escribir "Opci髇 Incorrecta. Ingrese un n鷐ero v醠ido: "
+				Escribir "Opci贸n Incorrecta. Ingrese un n煤mero v谩lido."
 		FinSegun
 	Hasta Que opcion = 5
 FinAlgoritmo
+
+// ======================================= Funci贸n donde se crea una misi贸n
+SubProceso crearMision(tipoEmerge Por Referencia, prov Por Referencia, local Por Referencia, descrip Por Referencia, unNivel Por Referencia, i Por Valor)
+	Definir confirmacion Como Cadena
+	
+	Escribir "--- CREAR NUEVA MISI脫N ---"
+	Escribir "Tipo de emergencia: "
+	Leer tipoEmerge[i]
+	Escribir "Zona / Provincia: "
+	Leer prov[i]
+	Escribir "Localidad / Area: "
+	Leer local[i]
+	Escribir "Descripci贸n: "
+	Leer descrip[i]
+	Escribir "Nivel de urgencia [1] BAJA   [2] MEDIA   [3] ALTA: "
+	Leer unNivel[i]
+	
+	// Mostrar vista previa
+	Escribir ""
+	Escribir "+----------------------------------------------------------+"
+	Escribir "|                 VISTA PREVIA DE LA MISION                |"
+	Escribir "+----------------------------------------------------------+"
+	Escribir "| Tipo      : ", tipoEmerge[i]
+	Escribir "| Ubicacion : ", prov[i], " - ", local[i]
+	Escribir "| Urgencia  : ", unNivel[i]
+	Escribir "| Detalle   : ", descrip[i]
+	Escribir "+----------------------------------------------------------+"
+	Escribir ""
+	
+	Repetir
+		Escribir "驴CONFIRMAR CREACION DE LA MISION? (S/N): "
+		Leer confirmacion
+		confirmacion <- Mayusculas(confirmacion)
+		
+		Si confirmacion <> "S" Y confirmacion <> "N" Entonces
+			Escribir "[ERROR] Opci贸n inv谩lida. Debe ingresar obligatoriamente S o N."
+		FinSi
+	Hasta Que confirmacion = "S" O confirmacion = "N"
+	
+	Si confirmacion = "S" Entonces
+		Escribir "----------------------------------------------------------"
+		Escribir "  [OK] MISION REGISTRADA EXITOSAMENTE CON ID: M", i
+		Escribir "----------------------------------------------------------"
+	SiNo
+		Escribir "----------------------------------------------------------"
+		Escribir "  [X] MISION CANCELADA. Los datos no se guardaron."
+		Escribir "----------------------------------------------------------"
+		tipoEmerge[i] <- ""
+		prov[i] <- ""
+		local[i] <- ""
+		descrip[i] <- ""
+		unNivel[i] <- ""
+	FinSi
+	
+	Escribir ""
+	Escribir "Presione una tecla para continuar..."
+	Esperar Tecla
+FinSubProceso
+
+// ======================================= Funci贸n donde se visualizan las misiones
+SubProceso mostrarMisionesActivas(tipoEmerge Por Referencia, prov Por Referencia, unNivel Por Referencia, totalMisiones Por Valor)
+	Definir j Como Entero
+	
+	Escribir "--- MISIONES ACTIVAS ---"
+	Escribir "+------+------------------------------+---------------+-------------+"
+	Escribir "| ID   | Tipo de emergencia           | Zona          |   Urgencia  |"
+	Escribir "+------+------------------------------+---------------+-------------+"
+	
+	Si totalMisiones = 1 Entonces
+		Escribir "|  --  | No hay misiones activas registradas          |  --         |"
+	SiNo
+		Para j <- 1 Hasta totalMisiones - 1 Con Paso 1 Hacer
+			Escribir "| M0", j, "  | ", tipoEmerge[j], "                   | ", prov[j], "         |      ", unNivel[j], "      |"
+		FinPara
+	FinSi
+	
+	Escribir "+------+------------------------------+---------------+-------------+"
+FinSubProceso
+
+// ======================================= Funci贸n para asignar Trabajador
+SubProceso asignarTrabajadores(tipoEmerge Por Referencia, prov Por Referencia, unNivel Por Referencia, totalMisiones Por Valor)
+	Definir idMision, idTrabajador, confirmacion Como Cadena
+	Definir j Como Entero
+	
+	Escribir "--- ASIGNAR TRABAJADORES ---"
+	Escribir "Seleccione la misi贸n a la que desea asignar trabajadores:"
+	Escribir "+------+-------------------------------+--------------------+----------+"
+	Escribir "| ID   | Tipo de emergencia           | Zona               | Urgencia |"
+	Escribir "+------+-------------------------------+--------------------+----------+"
+	
+	Si totalMisiones = 1 Entonces
+		Escribir "|  --  | No hay misiones registradas   | --                 | --       |"
+		Escribir "+------+-------------------------------+--------------------+----------+"
+	SiNo
+		Para j <- 1 Hasta totalMisiones - 1 Con Paso 1 Hacer
+			Escribir "| M0", j, "  | ", tipoEmerge[j], "                   | ", prov[j], "              | ", unNivel[j], "        |"
+		FinPara
+		Escribir "+------+-------------------------------+--------------------+----------+"
+		
+		Escribir ""
+		Escribir "Ingrese ID de la misi贸n (ej: 1): "
+		Leer idMision
+		
+		Escribir ""
+		Escribir "LISTA DE TRABAJADORES DISPONIBLES"
+		Escribir "+------+--------------------+--------------------+------------+"
+		Escribir "| ID   | Nombre y Apellido  | Especialidad       | Estado     |"
+		Escribir "+------+--------------------+--------------------+------------+"
+		Escribir "| T01  | Pepito Suarez      | Logistica          | Disponible |"
+		Escribir "| T02  | Lionel Messi       | Medico             | Disponible |"
+		Escribir "| T03  | Carlitos Bala      | Rescate            | Disponible |"
+		Escribir "+------+--------------------+--------------------+------------+"
+		
+		Escribir ""
+		Escribir "Ingrese ID del trabajador a asignar (ej: T02): "
+		Leer idTrabajador
+		
+		Escribir ""
+		Escribir "+----------------------------------------------------------+"
+		Escribir "|                   CONFIRMAR ASIGNACION                   |"
+		Escribir "+----------------------------------------------------------+"
+		Escribir "| Mision : M0", idMision
+		Escribir "| Personal: ", idTrabajador
+		Escribir "+----------------------------------------------------------+"
+		
+		Repetir
+			Escribir "驴CONFIRMAR ASIGNACION DEL TRABAJADOR? (S/N): "
+			Leer confirmacion
+			confirmacion <- Mayusculas(confirmacion)
+			
+			Si confirmacion <> "S" Y confirmacion <> "N" Entonces
+				Escribir "[ERROR] Opci贸n inv谩lida. Debe ingresar obligatoriamente S o N."
+			FinSi
+		Hasta Que confirmacion = "S" O confirmacion = "N"
+		
+		Si confirmacion = "S" Entonces
+			Escribir " [OK] Trabajador ", idTrabajador, " asignado a la misi贸n M0", idMision
+		SiNo
+			Escribir " [X] Asignaci贸n cancelada."
+		FinSi
+	FinSi
+FinSubProceso

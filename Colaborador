@@ -1,0 +1,28 @@
+// Funcion para mostrar solo las misiones publicas (Base 0)
+Funcion VerMisionesPublicas(matrizMisiones, cantidadMisiones)
+	Definir i Como Entero
+	Definir hayPublicas Como Logico
+	
+	i <- 0
+	hayPublicas <- Falso
+	
+	Escribir "======== MISIONES PUBLICAS DISPONIBLES ========"
+	Escribir ""
+	
+	// Al usar base_zero_arrays=1, iteramos desde 0 hasta cantidadMisiones - 1
+	Para i <- 0 Hasta cantidadMisiones - 1 Hacer
+		// Columna 2 contiene la Visibilidad ("Publica" / "Privada")
+		Si Mayusculas(matrizMisiones[i, 2]) = "PUBLICA" Entonces
+			Escribir "ID Mision : ", matrizMisiones[i, 0]
+			Escribir "Titulo    : ", matrizMisiones[i, 1]
+			Escribir "Estado    : ", matrizMisiones[i, 3]
+			Escribir "---------------------------------------------"
+			hayPublicas <- Verdadero
+		FinSi
+	FinPara
+	
+	Si NO hayPublicas Entonces
+		Escribir "No hay misiones publicas disponibles en este momento."
+	FinSi
+	Escribir ""
+FinFuncion
