@@ -42,7 +42,7 @@ Algoritmo coordinador
 			4:
 				Borrar Pantalla
 				Escribir "--- VER STOCK ---"
-				verStock()
+				gestionarStock()
 				Escribir ""
 				Escribir "Presione una tecla para volver al menú..."
 				Esperar Tecla
@@ -201,7 +201,117 @@ SubProceso asignarTrabajadores(misiones Por Referencia, totalMisiones Por Valor)
 FinSubProceso
 
 // ======================================= Función para ver stock
-
-SubProceso verStock()
-	Escribir "--- CONTROL DE STOCK E INSUMOS ---"
+SubProceso gestionarStock()
+	Definir stock Como Cadena
+	Definir opStock, filaMod, totalStock Como Entero
+	Definir nuevaCant, nuevoEstado Como Cadena
+	Definir j Como Entero
+	
+	Dimension stock[10, 7]
+	totalStock <- 5
+	
+	stock[1, 1] <- "S01" 
+	stock[1, 2] <- "Agua Mineral (Pack)     "    
+	stock[1, 3] <- "Hidratacion  "  
+	stock[1, 4] <- "120        "
+	stock[1, 5] <- "lts"
+	stock[1, 6] <- "Optimo"
+	
+	stock[2, 1] <- "S02" 
+	stock[2, 2] <- "Alimentos No Perecederos" 
+	stock[2, 3] <- "Alimentacion " 
+	stock[2, 4] <- "45         "
+	stock[2, 5] <- "Klg"
+	stock[2, 6] <- "Bajo"
+	
+	stock[3, 1] <- "S03" 
+	stock[3, 2] <- "Kits Primeros Auxilios  "   
+	stock[3, 3] <- "Medicamentos " 
+	stock[3, 4] <- "12         "
+	stock[3, 5] <- "uds"
+	stock[3, 6] <- "Critico"
+	
+	stock[4, 1] <- "S04" 
+	stock[4, 2] <- "Cascos y Arneses        "         
+	stock[4, 3] <- "Rescate      "      
+	stock[4, 4] <- "30         "
+	stock[4, 5] <- "uds"
+	stock[4, 6] <- "Optimo"
+	
+	stock[5, 1] <- "S05" 
+	stock[5, 2] <- "Radios VHF Portátiles   "     
+	stock[5, 3] <- "Comunicacion " 
+	stock[5, 4] <- "8          "
+	stock[5, 5] <- "uds"
+	stock[5, 6] <- "Bajo"
+	
+	Repetir
+		Borrar Pantalla
+		Escribir "--- GESTIÓN DE STOCK E INSUMOS ---"
+		Escribir "+------+-------------------------+--------------+--------------+----------+----------+"
+		Escribir "| ID   | Insumo / Recurso        | Categoria    | Cant Actual  | Unidad   | Estado   |"
+		Escribir "+------+-------------------------+--------------+--------------+----------+----------+"
+		Para j <- 1 Hasta 5 Hacer
+			Escribir "| ", stock[j, 1], " | ", stock[j, 2], " |", stock[j, 3], " | ", stock[j, 4], "  | ", stock[j, 5], "      | ", stock[j, 6], "   | "
+		FinPara
+		Escribir "+------+-------------------------+--------------+--------------+----------+-----------+"
+		Escribir ""
+		Escribir "[1] Modificar cantidad y estado de un insumo"
+		Escribir "[2] Agregar un nuevo insumo"
+		Escribir "[3] Volver al menú principal"
+		Escribir "Seleccione una opción: "
+		Leer opStock
+		
+		Segun opStock Hacer
+			1:
+				Escribir ""
+				Escribir "Ingrese el número de la fila del insumo a modificar (1 al 5): "
+				Leer filaMod
+				Si filaMod >= 1 Y filaMod <= totalStock Entonces
+					Escribir "Insumo seleccionado: ", stock[filaMod, 2]
+					Escribir "Ingrese la nueva cantidad actual: "
+					Leer nuevaCant
+					stock[filaMod, 4] <- nuevaCant
+					
+					Escribir "Ingrese el nuevo estado (Optimo / Bajo / Critico): "
+					Leer nuevoEstado
+					stock[filaMod, 6] <- nuevoEstado
+					
+					Escribir "[OK] Stock actualizado correctamente en memoria."
+				SiNo
+					Escribir "[ERROR] Número de fila inválido."
+				FinSi
+				Escribir "Presione una tecla para continuar..."
+				Esperar Tecla
+			2:
+				Si totalStock < 10 Entonces
+					totalStock <- totalStock + 1
+					Escribir ""
+					Escribir "--- AGREGAR NUEVO INSUMO ---"
+					Escribir "Ingrese ID (ej: S06): "
+					Leer stock[totalStock, 1]
+					Escribir "Ingrese Nombre del Insumo: "
+					Leer stock[totalStock, 2]
+					Escribir "Ingrese Categoría (Hidratacion/Alimentacion/Medicamentos/Rescate/Comunicacion/Ropa): "
+					Leer stock[totalStock, 3]
+					Escribir "Ingrese Cantidad: "
+					Leer stock[totalStock, 4]
+					Escribir "Ingrese Unidad de medida (Litros/Kg/Unid): "
+					Leer stock[totalStock, 5]
+					Escribir "Ingrese Estado (Optimo/Bajo/Critico): "
+					Leer stock[totalStock, 6]
+					
+					Escribir "[OK] Nuevo insumo agregado exitosamente al stock."
+				SiNo
+					Escribir "[ERROR] Se alcanzó el límite máximo de la matriz de stock (10 elementos)."
+				FinSi
+				Escribir "Presione una tecla para continuar..."
+				Esperar Tecla
+				
+			3:
+			De Otro Modo:
+				Escribir "Opción inválida."
+				Esperar Tecla
+		FinSegun
+	Hasta Que opStock = 3
 FinSubProceso
