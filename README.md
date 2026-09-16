@@ -60,7 +60,7 @@ organización durante una crisis.
 
 > Actualizado al *02/09/2026*
 
-- 🔄 **Coordinador** -- en desarrollo: Ver stock, Cerrar Sesión.
+- 🔄 **Coordinador** -- en desarrollo: Falta actualizar el cuadro el stock!!!!!.
 - 🔄 **Administrador** -- en desarrollo: *[qué falta]*
 - 🔄 **Trabajador** -- en desarrollo: Validación de misiones, y cambio de estado.
 - ⬜ **Colaborador** -- en desarrollo: *FuncMostrarMisiónesPúblicas*
