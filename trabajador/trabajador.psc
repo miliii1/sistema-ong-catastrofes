@@ -1,260 +1,164 @@
 Algoritmo trabajador
-	Definir idTrabajadorActual, idTrabajadorAsignado, cantMisiones Como Entero
-	Definir tipoEmergencia, nombreTrabajador, apellidoTrabajador Como Cadena
-	Definir provincia, localidad Como Cadena
-	Definir descripcion, nivel, estado Como Cadena
-	Dimension tipoEmergencia[20]
-	Dimension provincia[20], localidad[20]
-	Dimension descripcion[20], nivel[20], estado[20]
-	Dimension idTrabajadorAsignado[20]
-	Dimension nombreTrabajador[20], apellidoTrabajador[20]
+	// ==========================================================
+	// 			DEFINICION E INICIALIZACION DE VARIABLES   
+	// ==========================================================
+	Definir cantidadMisiones, cantidadTrabajadores, cantidadTrabajadoresPorMision Como Entero
+	Definir i, j, indiceMisionAsignada Como Entero
+	Definir maximoMisiones, maximoTrabajadores Como Entero
+	Definir misiones, trabajadores, idTrabajador, trabajadoresPorMision Como Cadena
+	Definir valido Como Logico
+	maximoMisiones <- 20
+	maximoTrabajadores <- 40
+	Dimension misiones[maximoMisiones, 7]
+	Dimension trabajadores[maximoTrabajadores, 3]
+	// La fila representa la misión y las columnas los trabajadores asignados
+	Dimension trabajadoresPorMision[maximoMisiones, 5]
+	Dimension cantidadTrabajadoresPorMision[maximoMisiones]
 	
-	cargarBaseDatos(tipoEmergencia, provincia, localidad, descripcion, nivel, estado, idTrabajadorAsignado, cantMisiones, nombreTrabajador, apellidoTrabajador)
+	//=============================================
+	// 			CARGA DE DATOS INICIALES
+	//=============================================
 	
-	// Seleccion e ingreso del trabajador
+	cargarBaseDatos(misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones, cantidadTrabajadores)
+	
+	//==========================================================
+	//          INGRESO Y SELECCION DEL TRABAJADOR
+	//==========================================================
 	Repetir
 		
-		Escribir ""
-		Escribir "=========================================================="
-		Escribir "                  PANEL DEL TRABAJADOR                    "
-		Escribir "=========================================================="
-		Escribir ""
-		Escribir "Trabajadores disponibles:"
-		Escribir ""
-		Escribir "T01 - ", nombreTrabajador[1], " ", apellidoTrabajador[1]
-		Escribir "T02 - ", nombreTrabajador[2], " ", apellidoTrabajador[2]
-		Escribir "T03 - ", nombreTrabajador[3], " ", apellidoTrabajador[3]
-		Escribir ""
-		Escribir "Ingrese su ID numerico: (Ingrese 0 para salir)"
-		Leer idTrabajadorActual
+		mostrarTrabajadoresDisponibles(trabajadores, cantidadTrabajadores, idTrabajador)
 		
-		Si idTrabajadorActual <> 0 Y (idTrabajadorActual < 1 O idTrabajadorActual > 3) Entonces
-			Escribir "ID de trabajador incorrecto. Presione Enter para volver a intentarlo..."
-			Esperar Tecla
+		Si cantidadTrabajadores <> 0 Entonces
+			// Solicita y valida el ID del trabajador
+			Si ingresarIdTrabajador(IdTrabajador, cantidadTrabajadores) Entonces
+				
+				// Busca la misión asignada al trabajador seleccionado
+				buscarMisionTrabajador(cantidadMisiones, cantidadTrabajadoresPorMision, idTrabajador, trabajadoresPorMision, indiceMisionAsignada)
+				
+				// Inicia el panel correspondiente al trabajador
+				menuTrabajador(misiones, trabajadores, idTrabajador, indiceMisionAsignada, cantidadTrabajadores)
+			FinSi
+		SiNo
+			Escribir ""
+			Escribir "Si desea salir presione 0"
 		FinSi
-		Si idTrabajadorActual>0 Entonces
-			Limpiar Pantalla
-			// Entra al menu con el Trabajador seleccionado
-			menuTrabajador(idTrabajadorActual, tipoEmergencia, provincia, localidad, descripcion, nivel, estado, idTrabajadorAsignado, cantMisiones)
-		FinSi
-		
-	Hasta Que idTrabajadorActual = 0  
-	
+		Limpiar Pantalla
+	Hasta Que idTrabajador = "0"  
 FinAlgoritmo
 
 // ==========================================================
-//                  BASE DE DATOS FALSA
+//                        FUNCIONES
 // ==========================================================
 
-SubProceso cargarBaseDatos(tipoEmergencia Por Referencia, provincia Por Referencia, localidad Por Referencia, descripcion Por Referencia, nivel Por Referencia, estado Por Referencia, idTrabajadorAsignado Por Referencia, cantMisiones Por Referencia, nombreTrabajador Por Referencia, apellidoTrabajador Por Referencia)
-	cantMisiones <- 3
+SubProceso mostrarTrabajadoresDisponibles(trabajadores, cantidadTrabajadores, idTrabajador Por Referencia)
 	
-	// MISIÓN  N°1
-	tipoEmergencia[1] <- "Inundacion"
-	provincia[1] <- "Buenos Aires"
-	localidad[1] <- "La Matanza"
-	descripcion[1] <- "Asistencia a familias afectadas"
-	nivel[1] <- "ALTA"
-	estado[1] <- "En curso"
-	nombreTrabajador[1] <- "Matias"
-	apellidoTrabajador[1] <- "Perez"
-	idTrabajadorAsignado[1] <- 3
-	
-	// MISIÓN N°2
-	tipoEmergencia[2] <- "Incendio"
-	provincia[2] <- "Cordoba"
-	localidad[2] <- "Villa Carlos Paz"
-	descripcion[2] <- "Evacuacion y entrega de suministros"
-	nivel[2] <- "MEDIA"
-	estado[2] <- "En camino"
-	nombreTrabajador[2] <- "Juan"
-	apellidoTrabajador[2] <- "Lopez"
-	idTrabajadorAsignado[2] <- 2
-	
-	// MISIÓN  N°3
-	tipoEmergencia[3] <- "Terremoto"
-	provincia[3] <- "Mendoza"
-	localidad[3] <- "Godoy Cruz"
-	descripcion[3] <- "Entrega de kits medicos"
-	nivel[3] <- "BAJA"
-	estado[3] <- "Pendiente"
-	nombreTrabajador[3] <- "Nicolas"
-	apellidoTrabajador[3] <- "Gutierrez"
-	idTrabajadorAsignado[3] <- 1
-	
-FinSubProceso
-
-// ==========================================================
-//                        VER MISION
-// ==========================================================
-SubProceso verMision(idTrabajadorActual Por Valor, tipoEmergencia Por Referencia, provincia Por Referencia, localidad Por Referencia, descripcion Por Referencia, nivel Por Referencia, estado Por Referencia, idTrabajadorAsignado Por Referencia, cantMisiones Por Valor)
-	
-	Definir i Como Entero
-	Definir encontrada Como Logico
-	
-	encontrada <- Falso
+	Definir i,j Como Entero
 	
 	Escribir ""
-	Escribir "+----------------------------------------------------------+"
-	Escribir "|                    MISION ASIGNADA                       |"
-	Escribir "+----------------------------------------------------------+"
-	
-	Para i <- 1 Hasta cantMisiones Hacer
+	Escribir "=========================================================="
+	Escribir "                  PANEL DEL TRABAJADOR                    "
+	Escribir "=========================================================="
+	Escribir ""
+	Si cantidadTrabajadores = 0 Entonces
 		
-		Si idTrabajadorAsignado[i] = idTrabajadorActual Entonces
-			
-			encontrada <- Verdadero
-			Escribir "| ID Mision    : M0", i
-			Escribir "| Tipo         : ", tipoEmergencia[i]
-			Escribir "| Provincia    : ", provincia[i]
-			Escribir "| Localidad    : ", localidad[i]
-			Escribir "| Descripcion  : ", descripcion[i]
-			Escribir "| Nivel        : ", nivel[i]
-			Escribir "| Estado       : ", estado[i]
-			Escribir "+----------------------------------------------------------+"
-			
-		FinSi
-	FinPara
-	
-	Si encontrada = Falso Entonces
+		Escribir "No existen trabajadores cargados en el sistema."
+		Escribir ""
+		Escribir "Presione 0 para salir del sistema..."
+		Leer idTrabajador
 		
-		Escribir "| No tiene ninguna mision asignada.                       |"
-		Escribir "+----------------------------------------------------------+"
-		
+	SiNo
+		Escribir "Trabajadores disponibles:"
+		Escribir ""
+		Para i<-1 Hasta cantidadTrabajadores Con Paso 1 Hacer
+			Para j<-0 Hasta 2 Con Paso 1 Hacer
+				Escribir Sin Saltar trabajadores[i, j] 
+				Si j=0 Entonces
+					Escribir Sin Saltar " - "
+				SiNo
+					Escribir Sin Saltar  " "
+				FinSi
+			FinPara
+			Escribir  " "
+		FinPara
 	FinSi
 	
 	Escribir ""
-	Escribir "Presione Enter para continuar..."
-	Esperar Tecla
+	Escribir "Presione 0 para salir"
+FinSubProceso
+
+SubProceso valido <- ingresarIdTrabajador (idTrabajador por Referencia, cantidadTrabajadores)
+	
+	Definir valido Como Logico
+	Escribir "Ingrese su ID de trabajador (ej: T01):"
+	Leer idTrabajador
+	Limpiar Pantalla
+	
+	valido <- validarIdTrabajador(idTrabajador, cantidadTrabajadores)
 	
 FinSubProceso
 
-// ==========================================================
-//                  FUNCION: VER ESTADO
-// ==========================================================
-SubProceso verEstado(idTrabajadorActual Por Valor, estado Por Referencia, idTrabajadorAsignado Por Referencia, cantMisiones Por Valor)
+Funcion valido <- validarIdTrabajador(idTrabajador, cantTrabajadores)
 	
-	Definir i Como Entero
-	Definir encontrada Como Logico
-	
-	encontrada <- Falso
-	
-	Escribir ""
-	Escribir "+----------------------------------------------------------+"
-	Escribir "|                    ESTADO DE MISION                      |"
-	Escribir "+----------------------------------------------------------+"
-	
-	Para i <- 1 Hasta cantMisiones Hacer
-		
-		Si idTrabajadorAsignado[i] = idTrabajadorActual Entonces
-			
-			encontrada <- Verdadero
-			
-			Escribir "| Mision: M0", i
-			Escribir "| Estado actual: ", estado[i]
-			Escribir "+----------------------------------------------------------+"
-			
-		FinSi
-	FinPara
-	
-	Si encontrada = Falso Entonces
-		
-		Escribir "| No tiene ninguna mision asignada.                       |"
-		Escribir "+----------------------------------------------------------+"
-		
-	FinSi
-	
-	Escribir ""
-	Escribir "Presione Enter para continuar..."
-	Esperar Tecla
-	
-FinSubProceso
-
-// ==========================================================
-//                  FUNCION: CAMBIAR ESTADO
-// ==========================================================
-SubProceso cambiarEstado(idTrabajadorActual Por Valor, estado Por Referencia, idTrabajadorAsignado Por Referencia, cantMisiones Por Valor)
-	
-	Definir i, opcEstado Como Entero
-	Definir encontrada Como Logico
-	
-	encontrada <- Falso
-	
-	Escribir ""
-	Escribir "+----------------------------------------------------------+"
-	Escribir "|                    CAMBIAR ESTADO                        |"
-	Escribir "+----------------------------------------------------------+"
-	
-	Para i <- 1 Hasta cantMisiones Hacer
-		
-		Si idTrabajadorAsignado[i] = idTrabajadorActual Entonces
-			
-			encontrada <- Verdadero
-			
-			Escribir "Mision: M0", i
-			Escribir "Estado actual: ", estado[i]
+	Definir valido Como Logico
+	valido <- Falso
+	Si idTrabajador <> "0" Entonces
+		Si (Longitud(idTrabajador) <> 3) Entonces
 			Escribir ""
-			
-			Escribir "[1] En camino"
-			Escribir "[2] En curso"
-			Escribir "[3] Controlada"
-			Escribir "[4] Volver"
-			Escribir "----------------------------------------------------------"
-			Escribir "Seleccione una opcion: "
-			Leer opcEstado
-			
-			Segun opcEstado Hacer
-				
-				1:
-					estado[i] <- "En camino"
+			Escribir "[ERROR] Ese formato de ID no existe en el sistema"
+			Escribir ""
+			Escribir "Presione cualquier tecla para continuar..."
+			Esperar Tecla
+		SiNo
+			Si Subcadena(idTrabajador,0,0) <> "T" Entonces
+				Escribir ""
+				Escribir "[ERROR] El ID debe comenzar con T"
+				Escribir ""
+				Escribir "Presione cualquier tecla para continuar..."
+				Esperar Tecla
+			SiNo
+				Si ConvertirANumero(Subcadena(idTrabajador,1,2)) < 1 O ConvertirANumero(Subcadena(idTrabajador,1,2)) > cantTrabajadores Entonces
 					Escribir ""
-					Escribir "Estado actualizado: EN CAMINO"
-					
-				2:
-					estado[i] <- "En curso"
+					Escribir "[ERROR] Ese trabajador no existe en el sistema"
 					Escribir ""
-					Escribir "Estado actualizado: EN CURSO"
-					
-				3:
-					estado[i] <- "Controlada"
-					Escribir ""
-					Escribir "Estado actualizado: CONTROLADA"
-					
-				4:
-					Escribir "Volviendo..."
-					
-				De Otro Modo:
-					Escribir "Opcion incorrecta."
-					
-			FinSegun
-			
+					Escribir "Presione cualquier tecla para continuar..."
+					Esperar Tecla
+				SiNo
+					valido <- Verdadero
+				FinSi
+			FinSi
 		FinSi
-	FinPara
-	
-	Si encontrada = Falso Entonces
-		
-		Escribir "No tiene ninguna mision asignada."
-		
 	FinSi
+FinFuncion
+
+SubProceso buscarMisionTrabajador (cantidadMisiones, cantidadTrabajadoresPorMision, idTrabajador, trabajadoresPorMision, indiceMisionAsignada Por Referencia)
 	
-	Escribir "Presione Enter para continuar..."
-	Esperar Tecla
-	
+	indiceMisionAsignada <- 0
+	Definir  i, j como entero
+	Para i<-1 Hasta cantidadMisiones Con paso 1 Hacer
+		Para j<-0 Hasta cantidadTrabajadoresPorMision[i]-1 Con Paso 1 Hacer
+			Si idTrabajador = trabajadoresPorMision[i, j] Entonces
+				indiceMisionAsignada <- i
+			FinSi
+		FinPara
+	FinPara
 FinSubProceso
 
-// ==========================================================
-//                  MENU DEL TRABAJADOR
-// ==========================================================
-SubProceso menuTrabajador(idTrabajadorActual Por Valor, tipoEmergencia Por Referencia, provincia Por Referencia, localidad Por Referencia, descripcion Por Referencia, nivel Por Referencia, estado Por Referencia, idTrabajadorAsignado Por Referencia, cantMisiones Por Valor)
+SubProceso menuTrabajador(misiones, trabajadores, idTrabajador, indiceMisionAsignada, cantidadTrabajadores)
 	
-	Definir opcion Como Entero
-	
+	Definir numTrabajador, i, opcion Como Entero
+	Para i<-1 Hasta cantidadTrabajadores Con Paso 1 Hacer
+		Si idTrabajador = trabajadores[i,0] Entonces
+			numTrabajador <- i
+		FinSi
+	FinPara
+	Limpiar Pantalla
 	Repetir
 		Escribir ""
 		Escribir "=========================================================="
-		Escribir "                  PANEL DE TRABAJADOR"
+		Escribir "                 MENU DEL TRABAJADOR"
 		Escribir "=========================================================="
-		Escribir "ID de trabajador: T0", idTrabajadorActual
+		Escribir "ID: ", idTrabajador
+		Escribir "Bienvenido ", trabajadores[numTrabajador, 1], " ", trabajadores[numTrabajador, 2]
 		Escribir ""
 		Escribir "[1] Ver mision asignada"
 		Escribir "[2] Ver estado"
@@ -266,11 +170,11 @@ SubProceso menuTrabajador(idTrabajadorActual Por Valor, tipoEmergencia Por Refer
 		
 		Segun opcion Hacer
 			1:
-				verMision(idTrabajadorActual, tipoEmergencia, provincia, localidad, descripcion, nivel, estado, idTrabajadorAsignado, cantMisiones)
+				verMision(misiones, indiceMisionAsignada)
 			2:
-				verEstado(idTrabajadorActual, estado, idTrabajadorAsignado, cantMisiones)
+				verEstado(misiones, indiceMisionAsignada)
 			3:
-				cambiarEstado(idTrabajadorActual, estado, idTrabajadorAsignado, cantMisiones)
+				cambiarEstado(misiones, indiceMisionAsignada)
 			4:
 				Limpiar Pantalla
 				Escribir ""
@@ -286,4 +190,178 @@ SubProceso menuTrabajador(idTrabajadorActual Por Valor, tipoEmergencia Por Refer
 	
 	Esperar 2 Segundos
 	Limpiar Pantalla
+FinSubProceso
+
+SubProceso verMision(misiones, misionActual)
+	
+	Limpiar Pantalla
+	Escribir ""
+	Escribir "+----------------------------------------------------------+"
+	Escribir "|                    MISION ASIGNADA                       |"
+	Escribir "+----------------------------------------------------------+"
+	
+	Si misionActual <> 0 Entonces
+		Escribir "| ID Mision    : ", misiones[misionActual, 0]
+		Escribir "| Tipo         : ", misiones[misionActual, 1]
+		Escribir "| Provincia    : ", misiones[misionActual, 2]
+		Escribir "| Localidad    : ", misiones[misionActual, 3]
+		Escribir "| Descripcion  : ", misiones[misionActual, 4]
+		Escribir "| Nivel        : ", misiones[misionActual, 5]
+		Escribir "+----------------------------------------------------------+"
+	Sino
+		Escribir "Este trabajador no tiene ninguna mision asignada"
+	FinSi
+	
+	Escribir ""
+	Escribir "Presione Enter para continuar..."
+	Esperar Tecla
+	Limpiar Pantalla
+FinSubProceso
+
+SubProceso verEstado(misiones, misionActual)
+	
+	Limpiar Pantalla
+	Escribir ""
+	Escribir "+----------------------------------------------------------+"
+	Escribir "|                    ESTADO DE MISION                      |"
+	Escribir "+----------------------------------------------------------+"
+	Si misionActual <> 0 Entonces
+		Escribir "| Mision: ", misiones[misionActual, 0]
+		Escribir "| Estado actual: ", misiones[misionActual, 6]
+		Escribir "+----------------------------------------------------------+"
+	Sino
+		Escribir "Este trabajador no tiene ninguna mision asignada"
+	FinSi
+	Escribir ""
+	Escribir "Presione Enter para continuar..."
+	Esperar Tecla
+	Limpiar Pantalla
+FinSubProceso
+
+SubProceso cambiarEstado(misiones, misionActual)
+	
+	Definir opcionEstado Como Entero
+	Limpiar Pantalla
+	Escribir ""
+	Escribir "+----------------------------------------------------------+"
+	Escribir "|                    CAMBIAR ESTADO                        |"
+	Escribir "+----------------------------------------------------------+"
+	
+	Si misionActual <> 0 Entonces
+		Escribir "| Mision: ", misiones[misionActual, 0]
+		Escribir "| Estado actual: ", misiones[misionActual, 6]
+		Escribir ""
+		
+		Escribir "[1] En camino"
+		Escribir "[2] En curso"
+		Escribir "[3] Controlada"
+		Escribir "[4] Volver"
+		Escribir "----------------------------------------------------------"
+		Escribir "Seleccione una opcion: "
+		Leer opcionEstado
+		
+		Segun opcionEstado Hacer
+			
+			1:
+				misiones[misionActual, 6] <- "En camino"
+				Escribir ""
+				Escribir "Estado actualizado: EN CAMINO"
+				
+			2:
+				misiones[misionActual, 6] <- "En curso"
+				Escribir ""
+				Escribir "Estado actualizado: EN CURSO"
+				
+			3:
+				misiones[misionActual, 6] <- "Controlada"
+				Escribir ""
+				Escribir "Estado actualizado: CONTROLADA"
+				
+			4:
+				Limpiar Pantalla
+				Escribir ""
+				Escribir "Volviendo..."
+				
+			De Otro Modo:
+				Escribir "Opcion incorrecta."
+				
+		FinSegun
+	Sino
+		Escribir "Este trabajador no tiene ninguna mision asignada"
+	FinSi
+	Escribir ""
+	Escribir "Precione cualquier tecla para continuar"
+	Esperar Tecla
+	Limpiar Pantalla
+FinSubProceso
+
+// ==========================================================
+//                  BASE DE DATOS FALSA
+// ==========================================================
+
+SubProceso cargarBaseDatos (misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia)
+	// Inicializar contadores
+	cantidadMisiones <- 0
+	cantidadTrabajadores <- 0
+	
+	// MISIÓN  N°1
+	cantidadMisiones <- cantidadMisiones + 1
+	
+	misiones[1,0] <- "M01"
+	misiones[1,1] <- "Inundacion"
+	misiones[1,2] <- "Buenos Aires"
+	misiones[1,3] <- "La Matanza"
+	misiones[1,4] <- "Asistencia a familias afectadas"
+	misiones[1,5] <- "ALTA"
+	misiones[1,6] <- "En curso"
+	
+	// Trabajadores asignados a M01
+	trabajadoresPorMision[1,0] <- "T01"
+	trabajadoresPorMision[1,1] <- "T02"
+	
+	cantidadTrabajadoresPorMision[1] <- 2
+	
+	// MISIÓN  N°2
+	cantidadMisiones <- cantidadMisiones + 1
+	
+	misiones[2,0] <- "M02"
+	misiones[2,1] <- "Incendio"
+	misiones[2,2] <- "Cordoba"
+	misiones[2,3] <- "Villa Carlos Paz"
+	misiones[2,4] <- "Evacuacion y entrega de suministros"
+	misiones[2,5] <- "MEDIA"
+	misiones[2,6] <- "En curso"
+	
+	// Trabajador asignado a M02
+	trabajadoresPorMision[2,0] <- "T03"
+	
+	cantidadTrabajadoresPorMision[2] <- 1
+	
+	//TRABAJADOR N°1
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	trabajadores[1,0] <- "T01" 
+	trabajadores[1,1] <- "Matias" 
+	trabajadores[1,2] <- "Perez"
+	
+	//TRABAJADOR N°2 
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	trabajadores[2,0] <- "T02" 
+	trabajadores[2,1] <- "Juan" 
+	trabajadores[2,2] <- "Lopez"
+	
+	//TRABAJADOR N°3 
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	trabajadores[3,0] <- "T03" 
+	trabajadores[3,1] <- "Nicolas" 
+	trabajadores[3,2] <- "Gutierrez"
+	
+	//TRABAJADOR N°4
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	trabajadores[4,0] <- "T04" 
+	trabajadores[4,1] <- "Lautaro" 
+	trabajadores[4,2] <- "Diaz"
 FinSubProceso
