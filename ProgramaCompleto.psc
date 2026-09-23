@@ -30,6 +30,7 @@ Algoritmo Unificar_proyecto
 		Escribir "ONG-CATASTROFES" 
 		Escribir "1- Trabajador"
 		Escribir "2- Coordinador"
+		Escribir "3- Colaborador"
 		Escribir "0 - Salir"
 		Leer num
 		Segun num Hacer
@@ -37,6 +38,8 @@ Algoritmo Unificar_proyecto
 				trabajador(tipoEmergencia, provincia, localidad, descripcion, nivel, estado, idTrabajadorAsignado, cantMisiones, nombreTrabajador, apellidoTrabajador)
 			2:
 				coordinador(tipoEmergencia, provincia, localidad, descripcion, nivel, idTrabajadorAsignado, nombreTrabajador, apellidoTrabajador, cantMisiones, stock, totalStock)
+			3:
+				VerMisionesPublicas(tipoEmergencia, provincia, nivel, cantMisiones)
 			De Otro Modo:
 				Escribir "Saliendo del sistema..."
 		FinSegun
@@ -566,4 +569,28 @@ SubProceso menuTrabajador(idTrabajadorActual Por Valor, tipoEmergencia Por Refer
 	
 	Esperar 2 Segundos
 	Limpiar Pantalla
+FinSubProceso
+
+// Funcion para mostrar solo las misiones publicas (Base 0)
+SubProceso VerMisionesPublicas(tipoEmerge Por Referencia, prov Por Referencia, unNivel Por Referencia, totalMisiones Por Valor)
+    Definir j Como Entero
+	
+    Borrar Pantalla
+    Escribir "======== MISIONES PUBLICAS DISPONIBLES ========"
+    Escribir ""
+	
+    Si totalMisiones = 1 Entonces
+        Escribir "No hay misiones publicas disponibles en este momento."
+    SiNo
+        Para j <- 1 Hasta totalMisiones - 1 Con Paso 1 Hacer
+            Escribir "ID Mision : M0", j
+            Escribir "Tipo      : ", tipoEmerge[j]
+            Escribir "Zona      : ", prov[j]
+            Escribir "Urgencia  : ", unNivel[j]
+            Escribir "---------------------------------------------"
+        FinPara
+    FinSi
+    Escribir ""
+    Escribir "Presione una tecla para volver al menú..."
+    Esperar Tecla
 FinSubProceso
