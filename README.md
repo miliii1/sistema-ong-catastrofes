@@ -58,11 +58,11 @@ organización durante una crisis.
 
 ## 📊 Estado actual del proyecto
 
-> Actualizado al *02/09/2026*
+> Actualizado al *23/09/2026*
 
 - 🔄 **Coordinador** -- en desarrollo: Falta actualizar el cuadro el stock!!!!!.
 - 🔄 **Administrador** -- en desarrollo: *[qué falta]*
-- 🔄 **Trabajador** -- en desarrollo: Validación de misiones, y cambio de estado.
+- 🔄 **Trabajador** -- en desarrollo: Verificar y controlar el estado de la misión.
 - ⬜ **Colaborador** -- en desarrollo: *FuncMostrarMisiónesPúblicas*
 
 <details>
