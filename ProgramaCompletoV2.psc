@@ -1,4 +1,11 @@
+//PREGUNTAS: Que es mejor, hacer la presentacion con power point o con HTML
+//			 Se puede crear usuarios ya pre cargados con su perfil ya especificado?    - IMAGEN
+//	         con el Stock, se podria usar una variable que use el Coordinador para saber cuando se hizo una donacion?  
+//			 donde pongo el link del html?
+//			 github site
+
 Algoritmo ProgramaCompleto
+	
 	// ==========================================================
 	// 			DEFINICION E INICIALIZACION DE VARIABLES   
 	// ==========================================================
@@ -20,7 +27,7 @@ Algoritmo ProgramaCompleto
 	Dimension misiones[maximoMisiones, cantidadDatosMision]
 	Dimension trabajadores[maximoTrabajadores, cantidadDatosTrabajador]
 	Dimension administradores[maximoAdministradores,cantidadDatosAdministrador]
-	// La fila representa la misión y las columnas los trabajadores asignados
+	// La fila representa la misiÃ³n y las columnas los trabajadores asignados
 	Dimension trabajadoresPorMision[maximoMisiones, maximoTrabajadoresPorMision]
 	Dimension cantidadTrabajadoresPorMision[maximoMisiones]
 	Definir num Como Entero
@@ -56,6 +63,8 @@ Algoritmo ProgramaCompleto
 			2:
 				coordinador(misiones, cantidadMisiones, trabajadoresPorMision, cantidadTrabajadoresPorMision, maximoMisiones, trabajadores, cantidadTrabajadores) 
 			3:
+				//Escribir cantidadTrabajadoresPorMision[3]     //PRUEBA
+				//Escribir Tecla
 				trabajador(misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones, cantidadTrabajadores, cantidadTrabajadoresPorMision)
 			4:
 				colaborador(misiones, cantidadMisiones)
@@ -104,9 +113,9 @@ SubProceso trabajador (misiones, trabajadores, trabajadoresPorMision, cantidadTr
 			// Solicita y valida el ID del trabajador
 			Si ingresarIdTrabajador(IdTrabajador, cantidadTrabajadores) Entonces
 				
-				// Busca la misión asignada al trabajador seleccionado
+				// Busca la misiÃ³n asignada al trabajador seleccionado
 				buscarMisionTrabajador(cantidadMisiones, cantidadTrabajadoresPorMision, idTrabajador, trabajadoresPorMision, indiceMisionAsignada)
-				
+			
 				// Inicia el panel correspondiente al trabajador
 				menuTrabajador(misiones, trabajadores, idTrabajador, indiceMisionAsignada, cantidadTrabajadores)
 			FinSi
@@ -204,6 +213,7 @@ SubProceso buscarMisionTrabajador (cantidadMisiones, cantidadTrabajadoresPorMisi
 	Definir  i, j como entero
 	Para i<-1 Hasta cantidadMisiones Con paso 1 Hacer
 		Para j<-0 Hasta cantidadTrabajadoresPorMision[i]-1 Con Paso 1 Hacer
+			//Escribir "Mision: ", i, " cant trabajadores: ", trabajadoresPorMision[i,j]
 			Si idTrabajador = trabajadoresPorMision[i, j] Entonces
 				indiceMisionAsignada <- i
 			FinSi
@@ -211,9 +221,9 @@ SubProceso buscarMisionTrabajador (cantidadMisiones, cantidadTrabajadoresPorMisi
 	FinPara
 FinSubProceso
 
-SubProceso menuTrabajador(misiones, trabajadores, idTrabajador, indiceMisionAsignada, cantidadTrabajadores)
+SubProceso menuTrabajador(misiones, trabajadores, idTrabajador, indiceMisionAsignada Por Referencia, cantidadTrabajadores)
 	
-	Definir numTrabajador, i, opcion Como Entero
+	Definir numTrabajador, i, opc Como Entero
 	Para i<-1 Hasta cantidadTrabajadores Con Paso 1 Hacer
 		Si idTrabajador = trabajadores[i,0] Entonces
 			numTrabajador <- i
@@ -234,9 +244,9 @@ SubProceso menuTrabajador(misiones, trabajadores, idTrabajador, indiceMisionAsig
 		Escribir "[4] Cerrar sesion"
 		Escribir "----------------------------------------------------------"
 		Escribir "Seleccione una opcion: "
-		Leer opcion
+		Leer opc
 		
-		Segun opcion Hacer
+		Segun opc Hacer
 			1:
 				verMision(misiones, indiceMisionAsignada)
 			2:
@@ -254,7 +264,7 @@ SubProceso menuTrabajador(misiones, trabajadores, idTrabajador, indiceMisionAsig
 				
 		FinSegun
 		
-	Hasta Que opcion = 4
+	Hasta Que opc = 4
 	
 	Esperar 2 Segundos
 	Limpiar Pantalla
@@ -269,6 +279,7 @@ SubProceso verMision(misiones, misionActual)
 	Escribir "+----------------------------------------------------------+"
 	
 	Si misionActual <> 0 Entonces
+	Escribir misionActual
 		Escribir "| ID Mision    : ", misiones[misionActual, 0]
 		Escribir "| Tipo         : ", misiones[misionActual, 1]
 		Escribir "| Provincia    : ", misiones[misionActual, 2]
@@ -388,12 +399,33 @@ FinSubProceso
 //                  BASE DE DATOS FALSA
 // ==========================================================
 
-SubProceso cargarBaseDatos (misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia)
-	// Inicializar contadores
+SubProceso cargarBaseDatos (misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision Por Referencia, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia)
 	
-	// MISIÓN  N°1
-	cantidadMisiones <- cantidadMisiones + 1
+	//TRABAJADOR NÂ°1
+	trabajadores[1,0] <- "T01" 
+	trabajadores[1,1] <- "Matias" 
+	trabajadores[1,2] <- "Perez"
+	cantidadTrabajadores <- cantidadTrabajadores + 1
 	
+	//TRABAJADOR NÂ°2
+	trabajadores[2,0] <- "T02" 
+	trabajadores[2,1] <- "Juan" 
+	trabajadores[2,2] <- "Lopez"
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	//TRABAJADOR NÂ°3 
+	trabajadores[3,0] <- "T03" 
+	trabajadores[3,1] <- "Nicolas" 
+	trabajadores[3,2] <- "Gutierrez"
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	//TRABAJADOR NÂ°4
+	trabajadores[4,0] <- "T04" 
+	trabajadores[4,1] <- "Lautaro" 
+	trabajadores[4,2] <- "Diaz"
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	// MISIÃ“N  NÂ°1
 	misiones[1,0] <- "M01"
 	misiones[1,1] <- "Inundacion"
 	misiones[1,2] <- "Buenos Aires"
@@ -402,15 +434,15 @@ SubProceso cargarBaseDatos (misiones, trabajadores, trabajadoresPorMision, canti
 	misiones[1,5] <- "ALTA"
 	misiones[1,6] <- "En camino"
 	
+	cantidadMisiones <- cantidadMisiones + 1
+	
 	// Trabajadores asignados a M01
 	trabajadoresPorMision[1,0] <- "T01"
 	trabajadoresPorMision[1,1] <- "T02"
 	
 	cantidadTrabajadoresPorMision[1] <- 2
 	
-	// MISIÓN  N°2
-	cantidadMisiones <- cantidadMisiones + 1
-	
+	// MISIÃ“N  NÂ°2
 	misiones[2,0] <- "M02"
 	misiones[2,1] <- "Incendio"
 	misiones[2,2] <- "Cordoba"
@@ -419,38 +451,12 @@ SubProceso cargarBaseDatos (misiones, trabajadores, trabajadoresPorMision, canti
 	misiones[2,5] <- "MEDIA"
 	misiones[2,6] <- "En camino"
 	
+	cantidadMisiones <- cantidadMisiones + 1
 	// Trabajador asignado a M02
 	trabajadoresPorMision[2,0] <- "T03"
-	
 	cantidadTrabajadoresPorMision[2] <- 1
 	
-	//TRABAJADOR N°1
-	cantidadTrabajadores <- cantidadTrabajadores + 1 
 	
-	trabajadores[1,0] <- "T01" 
-	trabajadores[1,1] <- "Matias" 
-	trabajadores[1,2] <- "Perez"
-	
-	//TRABAJADOR N°2 
-	cantidadTrabajadores <- cantidadTrabajadores + 1 
-	
-	trabajadores[2,0] <- "T02" 
-	trabajadores[2,1] <- "Juan" 
-	trabajadores[2,2] <- "Lopez"
-	
-	//TRABAJADOR N°3 
-	cantidadTrabajadores <- cantidadTrabajadores + 1 
-	
-	trabajadores[3,0] <- "T03" 
-	trabajadores[3,1] <- "Nicolas" 
-	trabajadores[3,2] <- "Gutierrez"
-	
-	//TRABAJADOR N°4
-	cantidadTrabajadores <- cantidadTrabajadores + 1 
-	
-	trabajadores[4,0] <- "T04" 
-	trabajadores[4,1] <- "Lautaro" 
-	trabajadores[4,2] <- "Diaz"
 FinSubProceso
 
 
@@ -559,7 +565,7 @@ SubProceso Verificacion(administradores, id Por Referencia, asegurar Por Referen
 		
 		Repetir
 			
-			Escribir "Ingrese su contraseña"
+			Escribir "Ingrese su contraseÃ±a"
 			Leer contra
 			
 			Para i <- 1 Hasta 3 Con Paso 1 Hacer
@@ -604,7 +610,7 @@ SubProceso AgregarTrabajador(misiones, trabajadores, cantTrabajadoresAsignados, 
 		FinSi
 		si (verif="S") Entonces
 			Para i<-1 hasta cantTrabajadores con paso 1 hacer
-				Escribir "Trabajador numero ",i,"°"
+				Escribir "Trabajador numero ",i,"Â°"
 				Para j<-0 hasta 2 con paso 1 hacer
 					Escribir trabajadores[i,j]
 				FinPara
@@ -631,14 +637,14 @@ SubProceso AgregarTrabajador(misiones, trabajadores, cantTrabajadoresAsignados, 
 				
 				numeroNuevoTrabajador <- ConvertirANumero(Subcadena(trabajadores[cantTrabajadores,0], 1, Longitud(trabajadores[cantTrabajadores,0])-1))
 				numeroNuevoTrabajador <- numeroNuevoTrabajador + 1
-			Si numeroNuevoTrabajador < 10 Entonces
-				trabajadores[numeroNuevoTrabajador,0] <- "T0" + ConvertirATexto(numeroNuevoTrabajador)
-			SiNo
-				trabajadores(cantTrabajadores,0) <- "T" + ConvertirATexto(numeroNuevoTrabajador)
+				Si numeroNuevoTrabajador < 10 Entonces
+					trabajadores[numeroNuevoTrabajador,0] <- "T0" + ConvertirATexto(numeroNuevoTrabajador)
+				SiNo
+					trabajadores(cantTrabajadores,0) <- "T" + ConvertirATexto(numeroNuevoTrabajador)
+				FinSi
+				Escribir "Ingrese su nombre y apellido del ID ",trabajadores[numeroNuevoTrabajador,0], ": "
+				leer nombyap
 			FinSi
-			Escribir "Ingrese su nombre y apellido del ID ",trabajadores[numeroNuevoTrabajador,0], ": "
-			leer nombyap
-		FinSi
 			Para i <- 1 Hasta Longitud(nombyap) Hacer
 				Si Subcadena(nombyap,i,i) = " " Entonces
 					pos <- i
@@ -729,7 +735,7 @@ SubProceso menu(trabajadores,cantTrabajadores)
 		FinSi
 		si (verif="S") entonces
 			Para i<-1 hasta cantTrabajadores con paso 1 hacer
-				Escribir "Trabajador numero ",i,"°"
+				Escribir "Trabajador numero ",i,"Â°"
 				Para j<-0 hasta 2 con paso 1 hacer
 					Escribir trabajadores(i,j)
 				FinPara
@@ -748,78 +754,92 @@ SubProceso coordinador (misiones, cantMisiones Por Referencia, trabajadoresPorMi
 	Repetir
 		Borrar Pantalla 
 		Escribir " ================ PANEL DE COORDINADOR ================ "
-		Escribir "[1] Crear misión      [2] Misiones Activas      [3] Asignar trabajadores      [4] Ver Stock      [5] Cerrar Sesión "
+		Escribir "[1] Crear misiÃ³n      [2] Misiones Activas      [3] Asignar trabajadores      [4] Ver Stock      [5] Cerrar SesiÃ³n "
 		Escribir "--------------------------------------------------------------------------------------------------------------------"
-		Escribir "Seleccione una opción: "
+		Escribir "Seleccione una opciÃ³n: "
 		Leer opcion
 		
 		Segun opcion Hacer
 			1:
 				Borrar Pantalla
-					crearMision(misiones, i, cantMisiones)
+				crearMision(misiones, i, cantMisiones)
 			2:
 				Borrar Pantalla
 				mostrarMisionesActivas(misiones, cantMisiones)
 				Escribir ""
-				Escribir "Presione una tecla para volver al menú..."
+				Escribir "Presione una tecla para volver al menÃº..."
 				Esperar Tecla
 			3:
 				Borrar Pantalla
 				asignarTrabajadores(misiones, cantMisiones, trabajadores, cantTrabajadores, cantTrabajadoresPorMision, trabajadoresPorMision)
 				Escribir ""
-				Escribir "Presione una tecla para volver al menú..."
+				Escribir "Presione una tecla para volver al menÃº..."
 				Esperar Tecla
 			4:
 				Borrar Pantalla
 				Escribir "--- VER STOCK ---"
 				gestionarStock()
 				Escribir ""
-				Escribir "Presione una tecla para volver al menú..."
+				Escribir "Presione una tecla para volver al menÃº..."
 				Esperar Tecla
 			5:
 				Borrar Pantalla
 				Escribir "Sistema cerrado correctamente."
 			De Otro Modo:
-				Escribir "Opción Incorrecta. Ingrese un número válido."
+				Escribir "OpciÃ³n Incorrecta. Ingrese un nÃºmero vÃ¡lido."
 				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
 		FinSegun
 	Hasta Que opcion = 5
 FinSubProceso
 
-// ======================================= Función donde se crea una misión
+// ======================================= FunciÃ³n donde se crea una misiÃ³n
 SubProceso crearMision(misiones, i, cantMisiones Por referencia)
 	Definir confirmacion Como Cadena
 	
+	
 	//MODIFICAR
-	Si i = 0 Entonces
+	Si cantMisiones = 0 Entonces
 		
 		misiones[1,0] <- "M01"
 		i<-i+1
 		
 	Sino
+		i<-cantMisiones + 1
+		
 		Si ConvertirANumero(SubCadena(misiones[1,0],1,2)) < 10 Entonces
-			i<-ConvertirANumero(SubCadena(misiones[1,0],1,2))
-			i<-i+1
+			
 			misiones[i,0] <- "M0" + ConvertirATexto(i)
 		SiNo
-			i<-ConvertirANumero(SubCadena(misiones[1,0],1,2))
-			i<-i+1
+			
 			misiones[i,0] <- "M" + ConvertirATexto(i)
 		FinSi
+		
 	FinSi
-	Escribir "--- CREAR NUEVA MISIÓN ---"
+	Escribir "--- CREAR NUEVA MISIÃ“N ---"
 	Escribir "Tipo de emergencia: "
 	Leer misiones[i, 1]
 	Escribir "Zona / Provincia: "
 	Leer misiones[i, 2]
 	Escribir "Localidad / Area: "
 	Leer misiones[i, 3]
-	Escribir "Descripción: "
+	Escribir "DescripciÃ³n: "
 	Leer misiones[i, 4]
-	Escribir "Nivel de urgencia [1] BAJA   [2] MEDIA   [3] ALTA: "
+	Escribir "Nivel de urgencia [1] BAJA   [2] MEDIA   [3] ALTA: " //
 	Leer misiones[i, 5]
+	Segun misiones[i,5] Hacer
+		"1":
+			misiones[i,5] <- "BAJA"
+		"2":
+			misiones[i,5] <- "MEDIA"
+		"3":
+			misiones[i,5] <- "ALTA"
+		De Otro Modo:
+			Escribir "Vuelva a intentarlo"
+	Fin Segun
+	
 	misiones[i,6] <- "En camino"
+	
 	
 	// Mostrar vista previa
 	Escribir ""
@@ -834,16 +854,17 @@ SubProceso crearMision(misiones, i, cantMisiones Por referencia)
 	Escribir ""
 	
 	Repetir
-		Escribir "¿CONFIRMAR CREACION DE LA MISION? (S/N): "
+		Escribir "Â¿CONFIRMAR CREACION DE LA MISION? (S/N): "
 		Leer confirmacion
 		confirmacion <- Mayusculas(confirmacion)
 		
 		Si confirmacion <> "S" Y confirmacion <> "N" Entonces
-			Escribir "[ERROR] Opción inválida. Debe ingresar obligatoriamente S o N."
+			Escribir "[ERROR] OpciÃ³n invÃ¡lida. Debe ingresar obligatoriamente S o N."
 		FinSi
 	Hasta Que confirmacion = "S" O confirmacion = "N"
 	
 	Si confirmacion = "S" Entonces
+		
 		Escribir "----------------------------------------------------------"
 		Escribir "  [OK] MISION REGISTRADA EXITOSAMENTE CON ID: ", misiones[i,0]
 		Escribir "----------------------------------------------------------"
@@ -866,7 +887,7 @@ SubProceso crearMision(misiones, i, cantMisiones Por referencia)
 	Esperar Tecla
 FinSubProceso
 
-// ======================================= Función donde se visualizan las misiones
+// ======================================= FunciÃ³n donde se visualizan las misiones
 SubProceso mostrarMisionesActivas(misiones Por Referencia, totalMisiones Por Valor)
 	Definir j Como Entero
 	
@@ -886,13 +907,14 @@ SubProceso mostrarMisionesActivas(misiones Por Referencia, totalMisiones Por Val
 	Escribir "+------+------------------------------+---------------+-------------+"
 FinSubProceso
 
-// ======================================= Función para asignar Trabajador
+// ======================================= FunciÃ³n para asignar Trabajador
 SubProceso asignarTrabajadores(misiones Por Referencia, totalMisiones Por Valor, trabajadores, cantTrabajadores, cantTrabajadorPorMision, trabajadorPorMision)
-	Definir idMision, idTrabajador, confirmacion Como Cadena
+	Definir idTrabajador, confirmacion Como Cadena
+	Definir idMision como entero
 	Definir i, j Como Entero
 	
 	Escribir "--- ASIGNAR TRABAJADORES ---"
-	Escribir "Seleccione la misión a la que desea asignar trabajadores:"
+	Escribir "Seleccione la misiÃ³n a la que desea asignar trabajadores:"
 	Escribir "+------+-------------------------------+--------------------+----------+"
 	Escribir "| ID   | Tipo de emergencia           | Zona               | Urgencia |"
 	Escribir "+------+-------------------------------+--------------------+----------+"
@@ -907,7 +929,7 @@ SubProceso asignarTrabajadores(misiones Por Referencia, totalMisiones Por Valor,
 		Escribir "+------+-------------------------------+--------------------+----------+"
 		
 		Escribir ""
-		Escribir "Ingrese ID de la misión (ej: 1): "
+		Escribir "Ingrese ID de la misiÃ³n (ej: 1): "
 		Leer idMision
 		
 		Escribir ""
@@ -942,27 +964,30 @@ SubProceso asignarTrabajadores(misiones Por Referencia, totalMisiones Por Valor,
 		Escribir "+----------------------------------------------------------+"
 		
 		Repetir
-			Escribir "¿CONFIRMAR ASIGNACION DEL TRABAJADOR? (S/N): "
+			Escribir "Â¿CONFIRMAR ASIGNACION DEL TRABAJADOR? (S/N): "
 			Leer confirmacion
 			confirmacion <- Mayusculas(confirmacion)
 			
 			Si confirmacion <> "S" Y confirmacion <> "N" Entonces
-				Escribir "[ERROR] Opción inválida. Debe ingresar obligatoriamente S o N."
+				Escribir "[ERROR] OpciÃ³n invÃ¡lida. Debe ingresar obligatoriamente S o N."
 			FinSi
 		Hasta Que confirmacion = "S" O confirmacion = "N"
 		
 		Si confirmacion = "S" Entonces
-			Escribir " [OK] Trabajador ", idTrabajador, " asignado a la misión M0", idMision
-			//MODIFICAR
-			trabajadorPorMision[ConvertirANumero(idMision),ConvertirANumero(Subcadena(idTrabajador, 1,2))-1] <- idTrabajador
-			cantTrabajadorPorMision[ConvertirANumero(idMision)] <- 1
+			Escribir " [OK] Trabajador ", idTrabajador, " asignado a la misiÃ³n M0", idMision
+			
+			trabajadorPorMision[idMision,cantTrabajadorPorMision[idMision]] <- idTrabajador
+			cantTrabajadorPorMision[idMision] <- cantTrabajadorPorMision[idMision] + 1
+			
+			Escribir Sin Saltar "En la mision: ", idMision , " hay ", cantTrabajadorPorMision[idMision], " trabajadores"
+			
 		SiNo
-			Escribir " [X] Asignación cancelada."
+			Escribir " [X] AsignaciÃ³n cancelada."
 		FinSi
 	FinSi
 FinSubProceso
 
-// ======================================= Función para ver stock
+// ======================================= FunciÃ³n para ver stock
 SubProceso gestionarStock
 	Definir stock Como Cadena
 	Definir opStock, filaMod, totalStock Como Entero
@@ -1001,7 +1026,7 @@ SubProceso gestionarStock
 	stock[4, 6] <- "Optimo"
 	
 	stock[5, 1] <- "S05" 
-	stock[5, 2] <- "Radios VHF Portátiles   "     
+	stock[5, 2] <- "Radios VHF PortÃ¡tiles   "     
 	stock[5, 3] <- "Comunicacion " 
 	stock[5, 4] <- "8          "
 	stock[5, 5] <- "uds"
@@ -1009,7 +1034,7 @@ SubProceso gestionarStock
 	
 	Repetir
 		Borrar Pantalla
-		Escribir "--- GESTIÓN DE STOCK E INSUMOS ---"
+		Escribir "--- GESTIÃ“N DE STOCK E INSUMOS ---"
 		Escribir "+------+-------------------------+--------------+--------------+----------+----------+"
 		Escribir "| ID   | Insumo / Recurso        | Categoria    | Cant Actual  | Unidad   | Estado   |"
 		Escribir "+------+-------------------------+--------------+--------------+----------+----------+"
@@ -1020,14 +1045,14 @@ SubProceso gestionarStock
 		Escribir ""
 		Escribir "[1] Modificar cantidad y estado de un insumo"
 		Escribir "[2] Agregar un nuevo insumo"
-		Escribir "[3] Volver al menú principal"
-		Escribir "Seleccione una opción: "
+		Escribir "[3] Volver al menÃº principal"
+		Escribir "Seleccione una opciÃ³n: "
 		Leer opStock
 		
 		Segun opStock Hacer
 			1:
 				Escribir ""
-				Escribir "Ingrese el número de la fila del insumo a modificar (1 al 5): "
+				Escribir "Ingrese el nÃºmero de la fila del insumo a modificar (1 al 5): "
 				Leer filaMod
 				Si filaMod >= 1 Y filaMod <= totalStock Entonces
 					Escribir "Insumo seleccionado: ", stock[filaMod, 2]
@@ -1041,7 +1066,7 @@ SubProceso gestionarStock
 					
 					Escribir "[OK] Stock actualizado correctamente en memoria."
 				SiNo
-					Escribir "[ERROR] Número de fila inválido."
+					Escribir "[ERROR] NÃºmero de fila invÃ¡lido."
 				FinSi
 				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
@@ -1054,7 +1079,7 @@ SubProceso gestionarStock
 					Leer stock[totalStock, 1]
 					Escribir "Ingrese Nombre del Insumo: "
 					Leer stock[totalStock, 2]
-					Escribir "Ingrese Categoría (Hidratacion/Alimentacion/Medicamentos/Rescate/Comunicacion/Ropa): "
+					Escribir "Ingrese CategorÃ­a (Hidratacion/Alimentacion/Medicamentos/Rescate/Comunicacion/Ropa): "
 					Leer stock[totalStock, 3]
 					Escribir "Ingrese Cantidad: "
 					Leer stock[totalStock, 4]
@@ -1065,14 +1090,14 @@ SubProceso gestionarStock
 					
 					Escribir "[OK] Nuevo insumo agregado exitosamente al stock."
 				SiNo
-					Escribir "[ERROR] Se alcanzó el límite máximo de la matriz de stock (10 elementos)."
+					Escribir "[ERROR] Se alcanzÃ³ el lÃ­mite mÃ¡ximo de la matriz de stock (10 elementos)."
 				FinSi
 				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
 				
 			3:
 			De Otro Modo:
-				Escribir "Opción inválida."
+				Escribir "OpciÃ³n invÃ¡lida."
 				Esperar Tecla
 		FinSegun
 	Hasta Que opStock = 3
