@@ -2,17 +2,20 @@ Algoritmo trabajador
 	// ==========================================================
 	// 			DEFINICION E INICIALIZACION DE VARIABLES   
 	// ==========================================================
-	Definir cantidadMisiones, cantidadTrabajadores, cantidadTrabajadoresPorMision Como Entero
+	Definir cantidadMisiones, cantidadTrabajadores, cantidadTrabajadoresPorMision, cantidadDatosMision, cantidadDatosTrabajador Como Entero
 	Definir i, j, indiceMisionAsignada Como Entero
-	Definir maximoMisiones, maximoTrabajadores Como Entero
+	Definir maximoMisiones, maximoTrabajadores, maximoTrabajadoresPorMision Como Entero
 	Definir misiones, trabajadores, idTrabajador, trabajadoresPorMision Como Cadena
 	Definir valido Como Logico
 	maximoMisiones <- 20
 	maximoTrabajadores <- 40
-	Dimension misiones[maximoMisiones, 7]
-	Dimension trabajadores[maximoTrabajadores, 3]
+	maximoTrabajadoresPorMision <- 5
+	cantidadDatosMision <- 7
+	cantidadDatosTrabajador <- 3
+	Dimension misiones[maximoMisiones, cantidadDatosMision]
+	Dimension trabajadores[maximoTrabajadores, cantidadDatosTrabajador]
 	// La fila representa la misión y las columnas los trabajadores asignados
-	Dimension trabajadoresPorMision[maximoMisiones, 5]
+	Dimension trabajadoresPorMision[maximoMisiones, maximoTrabajadoresPorMision]
 	Dimension cantidadTrabajadoresPorMision[maximoMisiones]
 	
 	//=============================================
@@ -241,6 +244,7 @@ FinSubProceso
 SubProceso cambiarEstado(misiones, misionActual)
 	
 	Definir opcionEstado Como Entero
+	
 	Limpiar Pantalla
 	Escribir ""
 	Escribir "+----------------------------------------------------------+"
@@ -251,41 +255,62 @@ SubProceso cambiarEstado(misiones, misionActual)
 		Escribir "| Mision: ", misiones[misionActual, 0]
 		Escribir "| Estado actual: ", misiones[misionActual, 6]
 		Escribir ""
-		
-		Escribir "[1] En camino"
-		Escribir "[2] En curso"
-		Escribir "[3] Controlada"
-		Escribir "[4] Volver"
-		Escribir "----------------------------------------------------------"
-		Escribir "Seleccione una opcion: "
-		Leer opcionEstado
-		
-		Segun opcionEstado Hacer
+		Si misiones[misionActual,6] = "Controlada" Entonces
+			Escribir "La mision ya se encuentra controlada."
+			Escribir "No es posible modificar su estado."
+			Escribir "----------------------------------------------------------"
+		Sino
 			
-			1:
-				misiones[misionActual, 6] <- "En camino"
-				Escribir ""
-				Escribir "Estado actualizado: EN CAMINO"
+			Escribir "[1] En camino"
+			Escribir "[2] En curso"
+			Escribir "[3] Controlada"
+			Escribir "[4] Volver"
+			Escribir "----------------------------------------------------------"
+			Escribir "Seleccione una opcion: "
+			Leer opcionEstado
+			
+			Segun opcionEstado Hacer
 				
-			2:
-				misiones[misionActual, 6] <- "En curso"
-				Escribir ""
-				Escribir "Estado actualizado: EN CURSO"
-				
-			3:
-				misiones[misionActual, 6] <- "Controlada"
-				Escribir ""
-				Escribir "Estado actualizado: CONTROLADA"
-				
-			4:
-				Limpiar Pantalla
-				Escribir ""
-				Escribir "Volviendo..."
-				
-			De Otro Modo:
-				Escribir "Opcion incorrecta."
-				
-		FinSegun
+				1:
+					Si misiones[misionActual,6] = "En camino" Entonces
+						Escribir "La mision ya se encuentra en camino."
+					SiNo
+						Si misiones[misionActual,6] = "En curso" O misiones[misionActual,6] = "Controlada" Entonces
+							Escribir "No se puede volver al estado En camino."
+						FinSi
+					FinSi
+					
+				2:
+					Si misiones[misionActual,6] = "En camino" Entonces
+						misiones[misionActual,6] <- "En curso"
+					SiNo
+						Si misiones[misionActual,6] = "En curso" Entonces
+							Escribir "La mision ya se encuentra En curso."
+						SiNo
+							Escribir "No se puede pasar una mision Controlada a En curso."
+						FinSi
+					FinSi
+					
+				3:
+					Si misiones[misionActual,6] = "En curso" Entonces
+						misiones[misionActual,6] <- "Controlada"
+					SiNo
+						Escribir "La mision debe estar En curso antes de ser Controlada."
+					FinSi
+					
+				4:
+					Limpiar Pantalla
+					Escribir ""
+					Escribir "Volviendo..."
+					
+				De Otro Modo:
+					Limpiar Pantalla
+					Escribir ""
+					Escribir "[ERROR] Opcion incorrecta."
+					Escribir ""
+					Esperar 2 Segundos
+			FinSegun
+		FinSi
 	Sino
 		Escribir "Este trabajador no tiene ninguna mision asignada"
 	FinSi
@@ -293,6 +318,7 @@ SubProceso cambiarEstado(misiones, misionActual)
 	Escribir "Precione cualquier tecla para continuar"
 	Esperar Tecla
 	Limpiar Pantalla
+	
 FinSubProceso
 
 // ==========================================================
