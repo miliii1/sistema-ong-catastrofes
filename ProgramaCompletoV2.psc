@@ -13,7 +13,7 @@ Algoritmo ProgramaCompleto
 	cantidadTrabajadores <- 0
 	cantidadUsuarios <- 0
 	maximoMisiones <- 20
-	maximoUsuarios <- 6
+	maximoUsuarios <- 7
 	maximoTrabajadores <- 40
 	maximoAdministradores <- 20
 	maximoTrabajadoresPorMision <- 5
@@ -30,6 +30,11 @@ Algoritmo ProgramaCompleto
 	// La fila representa la misión y las columnas los trabajadores asignados
 	Dimension trabajadoresPorMision[maximoMisiones, maximoTrabajadoresPorMision]
 	Dimension cantidadTrabajadoresPorMision[maximoMisiones]
+	Definir donacionesPorMision, k Como Entero
+	Dimension donacionesPorMision[maximoMisiones]
+	Para k <- 0 Hasta maximoMisiones - 1 Con Paso 1 Hacer
+		donacionesPorMision[k] <- 0
+	FinPara
 	Dimension stock[11, 7]
 	
 	
@@ -61,7 +66,7 @@ Algoritmo ProgramaCompleto
 			1:
 				filaUsuario <- iniciarSesion(usuarios, maximoUsuarios)
 				si filaUsuario <> -1 Entonces
-					elegirPerfilUsuario(filaUsuario, usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones, cantidadTrabajadores, administradores, maximoMisiones, stock, totalStock, acumuladoDonaciones)
+					elegirPerfilUsuario(filaUsuario, usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones, cantidadTrabajadores, administradores, maximoMisiones, stock, totalStock, acumuladoDonaciones, donacionesPorMision)
 				FinSi
 			2:
 				Borrar Pantalla 
@@ -194,7 +199,7 @@ Funcion esCorrecto <- validarContraseña(posUsuario, contraseña, usuarios)
 	FinSi
 FinFuncion
 
-SubProceso elegirPerfilUsuario (filaUsuario, usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia, administradores, maximoMisiones, stock, totalStock Por Referencia, acumuladoDonaciones Por Referencia)
+SubProceso elegirPerfilUsuario (filaUsuario, usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia, administradores, maximoMisiones, stock, totalStock Por Referencia, acumuladoDonaciones Por Referencia, donacionesPorMision)
 	Definir idUsuario, perfilUsuario Como Caracter
 	
     // Obtener el ID de la cuenta del usuario
@@ -219,7 +224,7 @@ SubProceso elegirPerfilUsuario (filaUsuario, usuarios, misiones, trabajadores, t
             colaborador(idUsuario, misiones, cantidadMisiones)
 			
         "F":
-            finanzas(idUsuario, acumuladoDonaciones, misiones, cantidadMisiones)
+            finanzas(idUsuario, acumuladoDonaciones, misiones, cantidadMisiones, donacionesPorMision)
 			
         De Otro Modo:
             Escribir "Error: el ID no tiene un rol reconocido."
@@ -549,6 +554,10 @@ SubProceso cargarBaseDatos (usuarios, misiones, trabajadores, trabajadoresPorMis
 	usuarios[5, 1] <- "CoordLuke"
 	usuarios[5, 2] <- "luke2026"
 	
+	//N°1 finanzas
+	usuarios[6, 0] <- "F01"
+	usuarios[6, 1] <- "FinanzasAna"
+	usuarios[6, 2] <- "ana2026"
 FinSubProceso
 
 
@@ -1289,64 +1298,139 @@ FinFuncion
 // ==========================================================
 //                        FINANZAS
 // ==========================================================
-SubProceso finanzas(idUsuario, acumuladoDonaciones Por Referencia, misiones, cantidadMisiones)
-	Definir opFinanzas Como Entero
-	Definir cantDistribuir Como Entero
-	Definir idMisionDestino Como Cadena
+SubProceso finanzas(idUsuario, acumuladoDonaciones Por Referencia, misiones, cantidadMisiones, donacionesPorMision)
+	Definir opFinanzas, monto, cantDistribuir, i, posMision, totalDistribuido Como Entero
+	Definir idMisionDestino, confirmacion Como Cadena
 	
 	Repetir
 		Limpiar Pantalla
 		Escribir " ================ PANEL DE FINANZAS ================ "
-		Escribir "Fondos / Donaciones totales acumuladas: ", acumuladoDonaciones
+		Escribir "ID: ", idUsuario
+		Escribir "Fondos disponibles para distribuir: ", acumuladoDonaciones
 		Escribir "-----------------------------------------------------"
-		Escribir "[1] Ver total acumulado de donaciones"
-		Escribir "[2] Distribuir donación a una misión"
-		Escribir "[3] Volver al menú principal"
-		Escribir "Seleccione una opción: "
+		Escribir "[1] Ver estado financiero"
+		Escribir "[2] Registrar donacion recibida"
+		Escribir "[3] Distribuir fondos a una mision"
+		Escribir "[4] Cerrar sesion"
+		Escribir "-----------------------------------------------------"
+		Escribir "Seleccione una opcion: "
 		Leer opFinanzas
 		
 		Segun opFinanzas Hacer
 			1:
 				Limpiar Pantalla
 				Escribir "--- ESTADO FINANCIERO ACTUAL ---"
-				Escribir "Total de donaciones recibidas pendientes de distribución: ", acumuladoDonaciones
+				Escribir "Fondos pendientes de distribucion: ", acumuladoDonaciones
+				Escribir ""
+				Escribir "Fondos asignados por mision:"
+				Escribir "-----------------------------------------------------"
+				totalDistribuido <- 0
+				Si cantidadMisiones = 0 Entonces
+					Escribir "No hay misiones registradas."
+				SiNo
+					Para i <- 1 Hasta cantidadMisiones Con Paso 1 Hacer
+						Escribir misiones[i,0], " | ", misiones[i,1], " | ", misiones[i,6], " | Recibido: ", donacionesPorMision[i]
+						totalDistribuido <- totalDistribuido + donacionesPorMision[i]
+					FinPara
+				FinSi
+				Escribir "-----------------------------------------------------"
+				Escribir "Total ya distribuido: ", totalDistribuido
+				Escribir "Total recaudado (distribuido + pendiente): ", totalDistribuido + acumuladoDonaciones
 				Escribir ""
 				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
+				
 			2:
 				Limpiar Pantalla
-				// AUN NO VALIDO SI LA MISION EXISTE Y 
-				// además no se registra hacia a donde va la donacion
-				Escribir "--- DISTRIBUIR DONACIONES A MISIONES ---"  
-				Si acumuladoDonaciones > 0 Entonces
-					Escribir "Monto / Recursos disponibles: ", acumuladoDonaciones
-					Escribir "Ingrese la cantidad de unidades a descontar para enviar: "
-					Leer cantDistribuir
-					
-					Si cantDistribuir > 0 Y cantDistribuir <= acumuladoDonaciones Entonces
-						Escribir "Ingrese el ID de la misión a la que se destinará (ej: M01): "
-						Leer idMisionDestino
-						
-						// sse resta del pozo general de finanzas
-						acumuladoDonaciones <- acumuladoDonaciones - cantDistribuir
-						
-						Escribir ""
-						Escribir "[OK!] Se han distribuido ", cantDistribuir, " recursos a la misión ", idMisionDestino
-						Escribir "Nuevo fondo disponible en Finanzas: ", acumuladoDonaciones
-					SiNo
-						Escribir "[ERROR] Cantidad inválida o supera el total disponible."
-					FinSi
+				Escribir "--- REGISTRAR DONACION ---"
+				Escribir "Ingrese el monto recibido: "
+				Leer monto
+				Si monto > 0 Entonces
+					acumuladoDonaciones <- acumuladoDonaciones + monto
+					Escribir "[OK] Donacion registrada. Fondos disponibles: ", acumuladoDonaciones
 				SiNo
-					Escribir "No hay donaciones acumuladas para distribuir en este momento."
+					Escribir "[ERROR!] El monto debe ser mayor a 0."
 				FinSi
 				Escribir ""
-				Escribir "Presione una tecla para continuar.."
+				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
+				
 			3:
-				Escribir "Volviendo al menú principal..."
+				Limpiar Pantalla
+				Escribir "--- DISTRIBUIR FONDOS A MISIONES ---"
+				Si acumuladoDonaciones <= 0 Entonces
+					Escribir "No hay fondos disponibles para distribuir."
+				SiNo
+					Si cantidadMisiones = 0 Entonces
+						Escribir "No hay misiones registradas."
+					SiNo
+						Escribir "Fondos disponibles: ", acumuladoDonaciones
+						Escribir ""
+						Escribir "MISIONES ACTIVAS:"
+						Escribir "-----------------------------------------------------"
+						Para i <- 1 Hasta cantidadMisiones Con Paso 1 Hacer
+							Si misiones[i,6] <> "Controlada" Entonces
+								Escribir misiones[i,0], " | ", misiones[i,1], " | ", misiones[i,2], " | Recibido: ", donacionesPorMision[i]
+							FinSi
+						FinPara
+						Escribir "-----------------------------------------------------"
+						Escribir "Ingrese el ID de la mision destino (ej: M01): "
+						Leer idMisionDestino
+						idMisionDestino <- Mayusculas(idMisionDestino)
+						
+						// busca la mision -> (solo las activas)
+						posMision <- -1
+						Para i <- 1 Hasta cantidadMisiones Con Paso 1 Hacer
+							Si misiones[i,0] = idMisionDestino Y misiones[i,6] <> "Controlada" Entonces
+								posMision <- i
+							FinSi
+						FinPara
+						
+						Si posMision = -1 Entonces
+							Escribir "[ERROR!] La mision no existe o ya esta controlada."
+						SiNo
+							Escribir "Cantidad a enviar a ", idMisionDestino, " (maximo ", acumuladoDonaciones, "): "
+							Leer cantDistribuir
+							
+							Si cantDistribuir > 0 Y cantDistribuir <= acumuladoDonaciones Entonces
+								Repetir
+									Escribir "Confirmar envio de ", cantDistribuir, " a ", idMisionDestino, "? (S/N): "
+									Leer confirmacion
+									confirmacion <- Mayusculas(confirmacion)
+									Si confirmacion <> "S" Y confirmacion <> "N" Entonces
+										Escribir "[ERROR!] Opcion invalida. Debe ingresar S o N."
+									FinSi
+								Hasta Que confirmacion = "S" O confirmacion = "N"
+								
+								Si confirmacion = "S" Entonces
+									acumuladoDonaciones <- acumuladoDonaciones - cantDistribuir
+									donacionesPorMision[posMision] <- donacionesPorMision[posMision] + cantDistribuir
+									Escribir ""
+									Escribir "[OK] Se enviaron ", cantDistribuir, " a la mision ", idMisionDestino
+									Escribir "La mision ya acumula: ", donacionesPorMision[posMision]
+									Escribir "Fondos restantes en Finanzas: ", acumuladoDonaciones
+								SiNo
+									Escribir "[X] Distribucion cancelada."
+								FinSi
+							SiNo
+								Escribir "[ERROR!] Cantidad invalida o supera los fondos disponibles."
+							FinSi
+						FinSi
+					FinSi
+				FinSi
+				Escribir ""
+				Escribir "Presione una tecla para continuar..."
+				Esperar Tecla
+				
+			4:
+				Limpiar Pantalla
+				Escribir "Sesion cerrada correctamente."
+				Esperar 1 Segundos
+				
 			De Otro Modo:
-				Escribir "Opción inválida."
+				Escribir "Opcion invalida."
+				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
 		FinSegun
-	Hasta Que opFinanzas = 3
+	Hasta Que opFinanzas = 4
 FinSubProceso
