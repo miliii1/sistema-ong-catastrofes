@@ -96,6 +96,151 @@ Algoritmo ProgramaCompleto
 		
 	Hasta Que num=2
 FinAlgoritmo
+
+
+// ==========================================================
+//                  BASE DE DATOS FALSA
+// ==========================================================
+
+SubProceso cargarBaseDatos (usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia)
+	
+	// MISIÓN  N°1
+	cantidadMisiones <- cantidadMisiones + 1
+	
+	misiones[1,0] <- "M01"
+	misiones[1,1] <- "Inundacion"
+	misiones[1,2] <- "Buenos Aires"
+	misiones[1,3] <- "La Matanza"
+	misiones[1,4] <- "Asistencia a familias afectadas"
+	misiones[1,5] <- "ALTA"
+	misiones[1,6] <- "En camino"
+	
+	// Trabajadores asignados a M01
+	trabajadoresPorMision[1,0] <- "T01"
+	trabajadoresPorMision[1,1] <- "T02"
+	
+	cantidadTrabajadoresPorMision[1] <- 2
+	
+	// MISIÓN  N°2
+	cantidadMisiones <- cantidadMisiones + 1
+	
+	misiones[2,0] <- "M02"
+	misiones[2,1] <- "Incendio"
+	misiones[2,2] <- "Cordoba"
+	misiones[2,3] <- "Villa Carlos Paz"
+	misiones[2,4] <- "Evacuacion y entrega de suministros"
+	misiones[2,5] <- "MEDIA"
+	misiones[2,6] <- "En camino"
+	
+	// Trabajador asignado a M02
+	trabajadoresPorMision[2,0] <- "T03"
+	
+	cantidadTrabajadoresPorMision[2] <- 1
+	
+	//TRABAJADOR N°1
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	trabajadores[1,0] <- "T01" 
+	trabajadores[1,1] <- "Matias" 
+	trabajadores[1,2] <- "Perez"
+	
+	//TRABAJADOR N°2 
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	trabajadores[2,0] <- "T02" 
+	trabajadores[2,1] <- "Juan" 
+	trabajadores[2,2] <- "Lopez"
+	
+	//TRABAJADOR N°3 
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	trabajadores[3,0] <- "T03" 
+	trabajadores[3,1] <- "Nicolas" 
+	trabajadores[3,2] <- "Gutierrez"
+	
+	//TRABAJADOR N°4
+	cantidadTrabajadores <- cantidadTrabajadores + 1 
+	
+	trabajadores[4,0] <- "T04" 
+	trabajadores[4,1] <- "Lautaro" 
+	trabajadores[4,2] <- "Diaz"
+	
+	//N°1 admin
+	usuarios[0, 0] <- "T02"
+	usuarios[0, 1] <- "N1colas"
+	usuarios[0, 2] <- "Pepito_"
+	
+	//N°2 admin
+	usuarios[1, 0] <- "A01"
+	usuarios[1, 1] <- "PolloAlvarez"
+	usuarios[1, 2] <- "galletita123"
+	
+	//N°3 admin
+	usuarios[2, 0] <- "A02"
+	usuarios[2, 1] <- "Jupiter123"
+	usuarios[2, 2] <- "planetatierra!"
+	
+	//N°1 coordinador
+	usuarios[3, 0] <- "C01"
+	usuarios[3, 1] <- "CoordAnakin"
+	usuarios[3, 2] <- "anakin2026"
+	
+	//N°2 coordinador
+	usuarios[4, 0] <- "C02"
+	usuarios[4, 1] <- "CoordLeia"
+	usuarios[4, 2] <- "leia2026"
+	
+	//N°3 coordinador
+	usuarios[5, 0] <- "C03"
+	usuarios[5, 1] <- "CoordLuke"
+	usuarios[5, 2] <- "luke2026"
+	
+	//N°1 finanzas
+	usuarios[6, 0] <- "F01"
+	usuarios[6, 1] <- "FinanzasAna"
+	usuarios[6, 2] <- "ana2026"
+FinSubProceso
+
+SubProceso cargarStock(stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia)
+	totalStock <- 5
+	
+	stockId[1] <- "S01"
+	stockNombre[1] <- "Agua Mineral (Pack)"
+	stockCategoria[1] <- "Hidratacion"
+	stockCantidad[1] <- 120
+	stockUnidad[1] <- "lts"
+	stockEstado[1] <- "Optimo"
+	
+	stockId[2] <- "S02"
+	stockNombre[2] <- "Alimentos No Perecederos"
+	stockCategoria[2] <- "Alimentacion"
+	stockCantidad[2] <- 45
+	stockUnidad[2] <- "kg"
+	stockEstado[2] <- "Bajo"
+	
+	stockId[3] <- "S03"
+	stockNombre[3] <- "Kits Primeros Auxilios"
+	stockCategoria[3] <- "Medicamentos"
+	stockCantidad[3] <- 12
+	stockUnidad[3] <- "uds"
+	stockEstado[3] <- "Critico"
+	
+	stockId[4] <- "S04"
+	stockNombre[4] <- "Cascos y Arneses"
+	stockCategoria[4] <- "Rescate"
+	stockCantidad[4] <- 30
+	stockUnidad[4] <- "uds"
+	stockEstado[4] <- "Optimo"
+	
+	stockId[5] <- "S05"
+	stockNombre[5] <- "Radios VHF Portatiles"
+	stockCategoria[5] <- "Comunicacion"
+	stockCantidad[5] <- 8
+	stockUnidad[5] <- "uds"
+	stockEstado[5] <- "Bajo"
+FinSubProceso
+
+
 // ==========================================================
 //                         USUARIOS
 // ==========================================================
@@ -156,7 +301,7 @@ Funcion posUsuario <- iniciarSesion(usuarios, maxUsuarios)
 					Escribir ""
 					Escribir "[ERROR] Contraseña incorrecta."
 					Si cantidadIntentos <= maximoIntentos Entonces
-						Escribir "Intentos restantes: ", (maximoIntentos - cantidadIntentos)
+						Escribir "Intentos restantes: ", maximoIntentos - cantidadIntentos
 					FinSi
 					Escribir ""
 					Escribir "Presiona cualquier tecla para continuar..."
@@ -463,148 +608,6 @@ SubProceso cambiarEstado(misiones, misionActual)
 	
 FinSubProceso
 
-
-// ==========================================================
-//                  BASE DE DATOS FALSA
-// ==========================================================
-
-SubProceso cargarBaseDatos (usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia)
-	
-	// MISIÓN  N°1
-	cantidadMisiones <- cantidadMisiones + 1
-	
-	misiones[1,0] <- "M01"
-	misiones[1,1] <- "Inundacion"
-	misiones[1,2] <- "Buenos Aires"
-	misiones[1,3] <- "La Matanza"
-	misiones[1,4] <- "Asistencia a familias afectadas"
-	misiones[1,5] <- "ALTA"
-	misiones[1,6] <- "En camino"
-	
-	// Trabajadores asignados a M01
-	trabajadoresPorMision[1,0] <- "T01"
-	trabajadoresPorMision[1,1] <- "T02"
-	
-	cantidadTrabajadoresPorMision[1] <- 2
-	
-	// MISIÓN  N°2
-	cantidadMisiones <- cantidadMisiones + 1
-	
-	misiones[2,0] <- "M02"
-	misiones[2,1] <- "Incendio"
-	misiones[2,2] <- "Cordoba"
-	misiones[2,3] <- "Villa Carlos Paz"
-	misiones[2,4] <- "Evacuacion y entrega de suministros"
-	misiones[2,5] <- "MEDIA"
-	misiones[2,6] <- "En camino"
-	
-	// Trabajador asignado a M02
-	trabajadoresPorMision[2,0] <- "T03"
-	
-	cantidadTrabajadoresPorMision[2] <- 1
-	
-	//TRABAJADOR N°1
-	cantidadTrabajadores <- cantidadTrabajadores + 1 
-	
-	trabajadores[1,0] <- "T01" 
-	trabajadores[1,1] <- "Matias" 
-	trabajadores[1,2] <- "Perez"
-	
-	//TRABAJADOR N°2 
-	cantidadTrabajadores <- cantidadTrabajadores + 1 
-	
-	trabajadores[2,0] <- "T02" 
-	trabajadores[2,1] <- "Juan" 
-	trabajadores[2,2] <- "Lopez"
-	
-	//TRABAJADOR N°3 
-	cantidadTrabajadores <- cantidadTrabajadores + 1 
-	
-	trabajadores[3,0] <- "T03" 
-	trabajadores[3,1] <- "Nicolas" 
-	trabajadores[3,2] <- "Gutierrez"
-	
-	//TRABAJADOR N°4
-	cantidadTrabajadores <- cantidadTrabajadores + 1 
-	
-	trabajadores[4,0] <- "T04" 
-	trabajadores[4,1] <- "Lautaro" 
-	trabajadores[4,2] <- "Diaz"
-	
-	//N°1 admin
-	usuarios[0, 0] <- "T02"
-	usuarios[0, 1] <- "N1colas"
-	usuarios[0, 2] <- "Pepito_"
-	
-	//N°2 admin
-	usuarios[1, 0] <- "A01"
-	usuarios[1, 1] <- "PolloAlvarez"
-	usuarios[1, 2] <- "galletita123"
-	
-	//N°3 admin
-	usuarios[2, 0] <- "A02"
-	usuarios[2, 1] <- "Jupiter123"
-	usuarios[2, 2] <- "planetatierra!"
-	
-	//N°1 coordinador
-	usuarios[3, 0] <- "C01"
-	usuarios[3, 1] <- "CoordAnakin"
-	usuarios[3, 2] <- "anakin2026"
-	
-	//N°2 coordinador
-	usuarios[4, 0] <- "C02"
-	usuarios[4, 1] <- "CoordLeia"
-	usuarios[4, 2] <- "leia2026"
-	
-	//N°3 coordinador
-	usuarios[5, 0] <- "C03"
-	usuarios[5, 1] <- "CoordLuke"
-	usuarios[5, 2] <- "luke2026"
-	
-	//N°1 finanzas
-	usuarios[6, 0] <- "F01"
-	usuarios[6, 1] <- "FinanzasAna"
-	usuarios[6, 2] <- "ana2026"
-FinSubProceso
-
-SubProceso cargarStock(stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia)
-	totalStock <- 5
-	
-	stockId[1] <- "S01"
-	stockNombre[1] <- "Agua Mineral (Pack)"
-	stockCategoria[1] <- "Hidratacion"
-	stockCantidad[1] <- 120
-	stockUnidad[1] <- "lts"
-	stockEstado[1] <- "Optimo"
-	
-	stockId[2] <- "S02"
-	stockNombre[2] <- "Alimentos No Perecederos"
-	stockCategoria[2] <- "Alimentacion"
-	stockCantidad[2] <- 45
-	stockUnidad[2] <- "kg"
-	stockEstado[2] <- "Bajo"
-	
-	stockId[3] <- "S03"
-	stockNombre[3] <- "Kits Primeros Auxilios"
-	stockCategoria[3] <- "Medicamentos"
-	stockCantidad[3] <- 12
-	stockUnidad[3] <- "uds"
-	stockEstado[3] <- "Critico"
-	
-	stockId[4] <- "S04"
-	stockNombre[4] <- "Cascos y Arneses"
-	stockCategoria[4] <- "Rescate"
-	stockCantidad[4] <- 30
-	stockUnidad[4] <- "uds"
-	stockEstado[4] <- "Optimo"
-	
-	stockId[5] <- "S05"
-	stockNombre[5] <- "Radios VHF Portatiles"
-	stockCategoria[5] <- "Comunicacion"
-	stockCantidad[5] <- 8
-	stockUnidad[5] <- "uds"
-	stockEstado[5] <- "Bajo"
-FinSubProceso
 
 // ==========================================================
 //                        ADMINISTRADOR
