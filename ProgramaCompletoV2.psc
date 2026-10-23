@@ -9,6 +9,7 @@ Algoritmo ProgramaCompleto
 	Definir num, totalStock Como Entero
 	Definir stock Como Cadena
 	
+
 	cantidadMisiones <- 0
 	cantidadTrabajadores <- 0
 	cantidadUsuarios <- 0
@@ -23,6 +24,7 @@ Algoritmo ProgramaCompleto
 	cantidadDatosUsuarios <- 3
 	totalStock <- 0
 	
+	Dimension stock[10, 7]	
 	Dimension misiones[maximoMisiones, cantidadDatosMision]
 	Dimension trabajadores[maximoTrabajadores, cantidadDatosTrabajador]
 	Dimension administradores[maximoAdministradores,cantidadDatosAdministrador]
@@ -30,12 +32,16 @@ Algoritmo ProgramaCompleto
 	// La fila representa la misión y las columnas los trabajadores asignados
 	Dimension trabajadoresPorMision[maximoMisiones, maximoTrabajadoresPorMision]
 	Dimension cantidadTrabajadoresPorMision[maximoMisiones]
-	Definir donacionesPorMision, k Como Entero
-	Dimension donacionesPorMision[maximoMisiones]
-	Para k <- 0 Hasta maximoMisiones - 1 Con Paso 1 Hacer
+	
+	// cambie a VECTORES!!!!
+	Definir stockId, stockNombre, stockCategoria, stockUnidad, stockEstado Como Caracter
+	Definir stockCantidad, donacionesPorMision, k Como Entero
+	Dimension stockId[11], stockNombre[11], stockCategoria[11], stockCantidad[11], stockUnidad[11], stockEstado[11]
+	Dimension donacionesPorMision[maximoMisiones + 1]
+	Para k <- 0 Hasta maximoMisiones Con Paso 1 Hacer
 		donacionesPorMision[k] <- 0
 	FinPara
-	Dimension stock[11, 7]
+	// ==========
 	
 	
 	Definir acumuladoDonaciones Como Entero
@@ -46,7 +52,7 @@ Algoritmo ProgramaCompleto
 	// 			CARGAR BASE DE DATOS
 	//=============================================
 	cargarBaseDatos(usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones, cantidadTrabajadores)
-	
+	cargarStock(stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock)
 	
 	Repetir 
 		Borrar Pantalla
@@ -66,7 +72,7 @@ Algoritmo ProgramaCompleto
 			1:
 				filaUsuario <- iniciarSesion(usuarios, maximoUsuarios)
 				si filaUsuario <> -1 Entonces
-					elegirPerfilUsuario(filaUsuario, usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones, cantidadTrabajadores, administradores, maximoMisiones, stock, totalStock, acumuladoDonaciones, donacionesPorMision)
+					elegirPerfilUsuario(filaUsuario, usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones, cantidadTrabajadores, administradores, maximoMisiones, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock, acumuladoDonaciones, donacionesPorMision)
 				FinSi
 			2:
 				Borrar Pantalla 
@@ -133,6 +139,7 @@ Funcion posUsuario <- iniciarSesion(usuarios, maxUsuarios)
 			Limpiar Pantalla
 		SiNo
 			Repetir
+				Limpiar Pantalla
 				Escribir "=========================================================="
 				Escribir "                   ONG - CATASTROFRES                     "
 				Escribir "=========================================================="
@@ -199,7 +206,7 @@ Funcion esCorrecto <- validarContraseña(posUsuario, contraseña, usuarios)
 	FinSi
 FinFuncion
 
-SubProceso elegirPerfilUsuario (filaUsuario, usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia, administradores, maximoMisiones, stock, totalStock Por Referencia, acumuladoDonaciones Por Referencia, donacionesPorMision)
+SubProceso elegirPerfilUsuario (filaUsuario, usuarios, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones Por Referencia, cantidadTrabajadores Por Referencia, administradores, maximoMisiones, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia, acumuladoDonaciones Por Referencia, donacionesPorMision)
 	Definir idUsuario, perfilUsuario Como Caracter
 	
     // Obtener el ID de la cuenta del usuario
@@ -218,7 +225,7 @@ SubProceso elegirPerfilUsuario (filaUsuario, usuarios, misiones, trabajadores, t
             trabajador(idUsuario, misiones, trabajadores, trabajadoresPorMision, cantidadTrabajadoresPorMision, cantidadMisiones, cantidadTrabajadores)
 			
         "C":
-            coordinador(idUsuario, misiones, cantidadMisiones, trabajadoresPorMision, cantidadTrabajadoresPorMision, maximoMisiones, trabajadores, cantidadTrabajadores, stock, totalStock)
+            coordinador(idUsuario, misiones, cantidadMisiones, trabajadoresPorMision, cantidadTrabajadoresPorMision, maximoMisiones, trabajadores, cantidadTrabajadores, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock, acumuladoDonaciones, donacionesPorMision)
 			
         "S":
             colaborador(idUsuario, misiones, cantidadMisiones)
@@ -560,6 +567,44 @@ SubProceso cargarBaseDatos (usuarios, misiones, trabajadores, trabajadoresPorMis
 	usuarios[6, 2] <- "ana2026"
 FinSubProceso
 
+SubProceso cargarStock(stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia)
+	totalStock <- 5
+	
+	stockId[1] <- "S01"
+	stockNombre[1] <- "Agua Mineral (Pack)"
+	stockCategoria[1] <- "Hidratacion"
+	stockCantidad[1] <- 120
+	stockUnidad[1] <- "lts"
+	stockEstado[1] <- "Optimo"
+	
+	stockId[2] <- "S02"
+	stockNombre[2] <- "Alimentos No Perecederos"
+	stockCategoria[2] <- "Alimentacion"
+	stockCantidad[2] <- 45
+	stockUnidad[2] <- "kg"
+	stockEstado[2] <- "Bajo"
+	
+	stockId[3] <- "S03"
+	stockNombre[3] <- "Kits Primeros Auxilios"
+	stockCategoria[3] <- "Medicamentos"
+	stockCantidad[3] <- 12
+	stockUnidad[3] <- "uds"
+	stockEstado[3] <- "Critico"
+	
+	stockId[4] <- "S04"
+	stockNombre[4] <- "Cascos y Arneses"
+	stockCategoria[4] <- "Rescate"
+	stockCantidad[4] <- 30
+	stockUnidad[4] <- "uds"
+	stockEstado[4] <- "Optimo"
+	
+	stockId[5] <- "S05"
+	stockNombre[5] <- "Radios VHF Portatiles"
+	stockCategoria[5] <- "Comunicacion"
+	stockCantidad[5] <- 8
+	stockUnidad[5] <- "uds"
+	stockEstado[5] <- "Bajo"
+FinSubProceso
 
 // ==========================================================
 //                        ADMINISTRADOR
@@ -849,18 +894,19 @@ FinSubProceso
 //                        COORDINADOR
 // ==========================================================
 
-SubProceso coordinador (idUsuario, misiones, cantMisiones Por Referencia, trabajadoresPorMision, cantTrabajadoresPorMision, maximoMisiones, trabajadores, cantTrabajadores, stock, totalStock Por Referencia)
+SubProceso coordinador (idUsuario, misiones, cantMisiones Por Referencia, trabajadoresPorMision, cantTrabajadoresPorMision, maximoMisiones, trabajadores, cantTrabajadores, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia, acumuladoDonaciones Por Referencia, donacionesPorMision)
 	Definir opcion Como Entero
 	
 	Repetir
 		Borrar Pantalla 
 		Escribir " ================ PANEL DE COORDINADOR ================ "
 		Escribir "ID: ", idUsuario
+		Escribir "Fondos disponibles: $", acumuladoDonaciones
 		Escribir ""
 		Escribir "[1] Crear mision"
 		Escribir "[2] Misiones activas"
 		Escribir "[3] Asignar trabajadores"
-		Escribir "[4] Ver stock"
+		Escribir "[4] Stock y compra de insumos"
 		Escribir "[5] Cerrar sesion"
 		Escribir "------------------------------------------------------"
 		Escribir "Seleccione una opcion: "
@@ -872,7 +918,7 @@ SubProceso coordinador (idUsuario, misiones, cantMisiones Por Referencia, trabaj
 				crearMision(misiones, cantMisiones, maximoMisiones, cantTrabajadoresPorMision)
 			2:
 				Borrar Pantalla
-				mostrarMisionesActivas(misiones, cantMisiones)
+				mostrarMisionesActivas(misiones, cantMisiones, donacionesPorMision)
 				Escribir ""
 				Escribir "Presione una tecla para volver al menu..."
 				Esperar Tecla
@@ -883,7 +929,7 @@ SubProceso coordinador (idUsuario, misiones, cantMisiones Por Referencia, trabaj
 				Escribir "Presione una tecla para volver al menu..."
 				Esperar Tecla
 			4:
-				gestionarStock(stock, totalStock)
+				gestionarStock(stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock, acumuladoDonaciones)
 			5:
 				Borrar Pantalla
 				Escribir "Sesion cerrada correctamente."
@@ -902,7 +948,7 @@ SubProceso crearMision(misiones, cantMisiones Por Referencia, maximoMisiones, ca
 	Definir i Como Entero
 	
 	Si cantMisiones + 1 >= maximoMisiones Entonces
-		Escribir "[ERROR!] Se alcanzo el maximo de misiones permitidas."
+		Escribir "[ERROR] Se alcanzo el maximo de misiones permitidas."
 	SiNo
 		i <- cantMisiones + 1
 		
@@ -923,7 +969,6 @@ SubProceso crearMision(misiones, cantMisiones Por Referencia, maximoMisiones, ca
 		Escribir "Descripcion: "
 		Leer misiones[i, 4]
 		
-		// repite hasta que elij una urgencia valida
 		Repetir
 			Escribir "Nivel de urgencia [1] BAJA   [2] MEDIA   [3] ALTA: "
 			Leer urgencia
@@ -936,7 +981,7 @@ SubProceso crearMision(misiones, cantMisiones Por Referencia, maximoMisiones, ca
 					Si urgencia = "3" Entonces
 						misiones[i,5] <- "ALTA"
 					SiNo
-						Escribir "[ERROR!] Opcion invalida. Elija 1, 2 o 3."
+						Escribir "[ERROR] Opcion invalida. Elija 1, 2 o 3."
 						urgencia <- ""
 					FinSi
 				FinSi
@@ -945,7 +990,6 @@ SubProceso crearMision(misiones, cantMisiones Por Referencia, maximoMisiones, ca
 		
 		misiones[i,6] <- "En camino"
 		
-		// Vista previa
 		Escribir ""
 		Escribir "+----------------------------------------------------------+"
 		Escribir "|                 VISTA PREVIA DE LA MISION                |"
@@ -990,22 +1034,29 @@ SubProceso crearMision(misiones, cantMisiones Por Referencia, maximoMisiones, ca
 	Escribir "Presione una tecla para continuar..."
 	Esperar Tecla
 FinSubProceso
-// ======================================= Función donde se visualizan las misiones
-SubProceso mostrarMisionesActivas(misiones, totalMisiones)
-	Definir j, activas Como Entero
+
+// ======================================= Misiones activas
+SubProceso mostrarMisionesActivas(misiones, totalMisiones, donacionesPorMision)
+	Definir j, activas, totalFondos Como Entero
 	activas <- 0
+	totalFondos <- 0
 	
 	Escribir "--- MISIONES ACTIVAS ---"
 	Escribir "----------------------------------------------------------"
 	Para j <- 1 Hasta totalMisiones Con Paso 1 Hacer
 		Si misiones[j,6] <> "Controlada" Entonces
-			Escribir misiones[j,0], " | ", misiones[j,1], " | ", misiones[j,2], " - ", misiones[j,3], " | Urgencia: ", misiones[j,5], " | Estado: ", misiones[j,6]
+			Escribir misiones[j,0], " | ", misiones[j,1], " | ", misiones[j,2], " - ", misiones[j,3]
+			Escribir "     Urgencia: ", misiones[j,5], " | Estado: ", misiones[j,6], " | Fondos: $", donacionesPorMision[j]
+			Escribir ""
 			activas <- activas + 1
+			totalFondos <- totalFondos + donacionesPorMision[j]
 		FinSi
 	FinPara
 	
 	Si activas = 0 Entonces
 		Escribir "No hay misiones activas registradas."
+	SiNo
+		Escribir "Total de fondos en misiones activas: $", totalFondos
 	FinSi
 	Escribir "----------------------------------------------------------"
 FinSubProceso
@@ -1030,7 +1081,6 @@ SubProceso asignarTrabajadores(misiones, totalMisiones, trabajadores, cantTrabaj
 		FinPara
 		Escribir "----------------------------------------------------------"
 		
-		// en esta parte valida si existe la mision
 		Repetir
 			Escribir "Ingrese el numero de la mision (1 al ", totalMisiones, "): "
 			Leer idMision
@@ -1039,7 +1089,6 @@ SubProceso asignarTrabajadores(misiones, totalMisiones, trabajadores, cantTrabaj
 			FinSi
 		Hasta Que idMision >= 1 Y idMision <= totalMisiones
 		
-		// comprueba q la la mision no este llena
 		Si cantTrabajadorPorMision[idMision] >= maxPorMision Entonces
 			Escribir "[ERROR] La mision ", misiones[idMision,0], " ya tiene el maximo de ", maxPorMision, " trabajadores."
 		SiNo
@@ -1051,9 +1100,8 @@ SubProceso asignarTrabajadores(misiones, totalMisiones, trabajadores, cantTrabaj
 			FinPara
 			Escribir "----------------------------------------------------------"
 			
-			// aca se valida q el trabajador exista
 			Repetir
-				Escribir "Ingrese ID del trabajador a asignar (ej: T02): "
+				Escribir "Ingrese ID del trabajador a asignar (ej: T04): "
 				Leer idTrabajador
 				idTrabajador <- Mayusculas(idTrabajador)
 				existe <- Falso
@@ -1067,7 +1115,6 @@ SubProceso asignarTrabajadores(misiones, totalMisiones, trabajadores, cantTrabaj
 				FinSi
 			Hasta Que existe
 			
-			// comprobamos q no este asignado a otra mision!!
 			yaAsignado <- Falso
 			Para i <- 1 Hasta totalMisiones Con Paso 1 Hacer
 				Para j <- 0 Hasta cantTrabajadorPorMision[i] - 1 Con Paso 1 Hacer
@@ -1112,79 +1159,35 @@ SubProceso asignarTrabajadores(misiones, totalMisiones, trabajadores, cantTrabaj
 FinSubProceso
 
 // ======================================= Función para ver stock
-SubProceso gestionarStock(stock Por Referencia, totalStock Por Referencia)
-	Definir opStock, filaMod Como Entero
-	Definir nuevaCant, nuevoEstado Como Cadena
-	Definir j Como Entero
-	
-	Si totalStock = 0 Entonces
-		totalStock <- 5
-		
-		stock[1, 1] <- "S01" 
-		stock[1, 2] <- "Agua Mineral (Pack)     "    
-		stock[1, 3] <- "Hidratacion  "  
-		stock[1, 4] <- "120        "
-		stock[1, 5] <- "lts"
-		stock[1, 6] <- "Optimo"
-		
-		stock[2, 1] <- "S02" 
-		stock[2, 2] <- "Alimentos No Perecederos" 
-		stock[2, 3] <- "Alimentacion " 
-		stock[2, 4] <- "45         "
-		stock[2, 5] <- "Klg"
-		stock[2, 6] <- "Bajo"
-		
-		stock[3, 1] <- "S03" 
-		stock[3, 2] <- "Kits Primeros Auxilios  "   
-		stock[3, 3] <- "Medicamentos " 
-		stock[3, 4] <- "12         "
-		stock[3, 5] <- "uds"
-		stock[3, 6] <- "Critico"
-		
-		stock[4, 1] <- "S04" 
-		stock[4, 2] <- "Cascos y Arneses        "         
-		stock[4, 3] <- "Rescate      "      
-		stock[4, 4] <- "30         "
-		stock[4, 5] <- "uds"
-		stock[4, 6] <- "Optimo"
-		
-		stock[5, 1] <- "S05" 
-		stock[5, 2] <- "Radios VHF Portátiles   "     
-		stock[5, 3] <- "Comunicacion " 
-		stock[5, 4] <- "8          "
-		stock[5, 5] <- "uds"
-		stock[5, 6] <- "Bajo"
-	FinSi
-	
+SubProceso gestionarStock(stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia, acumuladoDonaciones Por Referencia)
+	Definir opStock, filaMod, j, cantCompra, costoUnitario, costoTotal Como Entero
+	Definir nuevoEstado Como Cadena
 	
 	Repetir
 		Borrar Pantalla
-		Escribir "--- GESTIÓN DE STOCK E INSUMOS ---"
-		Escribir "+------+-------------------------+--------------+--------------+----------+----------+"
-		Escribir "| ID   | Insumo / Recurso        | Categoria    | Cant Actual  | Unidad   | Estado   |"
-		Escribir "+------+-------------------------+--------------+--------------+----------+----------+"
-		Para j <- 1 Hasta totalStock Hacer
-			Escribir "| ", stock[j, 1], " | ", stock[j, 2], " |", stock[j, 3], " | ", stock[j, 4], "  | ", stock[j, 5], "      | ", stock[j, 6], "   | "
+		Escribir "--- GESTION DE STOCK E INSUMOS ---"
+		Escribir "Fondos disponibles para compras: $", acumuladoDonaciones
+		Escribir "------------------------------------------------------------"
+		Para j <- 1 Hasta totalStock Con Paso 1 Hacer
+			Escribir "[", j, "] ", stockId[j], " | ", stockNombre[j], " | ", stockCategoria[j], " | ", stockCantidad[j], " ", stockUnidad[j], " | ", stockEstado[j]
 		FinPara
-		Escribir "+------+-------------------------+--------------+--------------+----------+-----------+"
+		Escribir "------------------------------------------------------------"
 		Escribir ""
 		Escribir "[1] Modificar cantidad y estado de un insumo"
 		Escribir "[2] Agregar un nuevo insumo"
-		Escribir "[3] Volver al menú principal"
-		Escribir "Seleccione una opción: "
+		Escribir "[3] Comprar insumo con los fondos disponibles"
+		Escribir "[4] Volver al menu principal"
+		Escribir "Seleccione una opcion: "
 		Leer opStock
 		
 		Segun opStock Hacer
 			1:
-				Escribir ""
-				Escribir "Ingrese el número de la fila del insumo a modificar (1 al ", totalStock,"): "
+				Escribir "Ingrese el numero del insumo a modificar (1 al ", totalStock, "): "
 				Leer filaMod
 				Si filaMod >= 1 Y filaMod <= totalStock Entonces
-					Escribir "Insumo seleccionado: ", stock[filaMod, 2]
+					Escribir "Insumo seleccionado: ", stockNombre[filaMod]
 					Escribir "Ingrese la nueva cantidad actual: "
-					Leer nuevaCant
-					stock[filaMod, 4] <- nuevaCant
-					
+					Leer stockCantidad[filaMod]
 					Repetir
 						Escribir "Ingrese el nuevo estado (Optimo / Bajo / Critico): "
 						Leer nuevoEstado
@@ -1192,45 +1195,79 @@ SubProceso gestionarStock(stock Por Referencia, totalStock Por Referencia)
 							Escribir "[ERROR] Estado invalido."
 						FinSi
 					Hasta Que Mayusculas(nuevoEstado) = "OPTIMO" O Mayusculas(nuevoEstado) = "BAJO" O Mayusculas(nuevoEstado) = "CRITICO"
-					stock[filaMod, 6] <- nuevoEstado
-					
-					Escribir "[OK] Stock actualizado correctamente en memoria."
+					stockEstado[filaMod] <- nuevoEstado
+					Escribir "[OK] Stock actualizado correctamente."
 				SiNo
-					Escribir "[ERROR] Número de fila inválido."
+					Escribir "[ERROR] Numero de insumo invalido."
 				FinSi
 				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
+				
 			2:
 				Si totalStock < 10 Entonces
 					totalStock <- totalStock + 1
-					Escribir ""
 					Escribir "--- AGREGAR NUEVO INSUMO ---"
 					Escribir "Ingrese ID (ej: S06): "
-					Leer stock[totalStock, 1]
-					Escribir "Ingrese Nombre del Insumo: "
-					Leer stock[totalStock, 2]
-					Escribir "Ingrese Categoría (Hidratacion/Alimentacion/Medicamentos/Rescate/Comunicacion/Ropa): "
-					Leer stock[totalStock, 3]
-					Escribir "Ingrese Cantidad: "
-					Leer stock[totalStock, 4]
-					Escribir "Ingrese Unidad de medida (Litros/Kg/Unid): "
-					Leer stock[totalStock, 5]
-					Escribir "Ingrese Estado (Optimo/Bajo/Critico): "
-					Leer stock[totalStock, 6]
-					
-					Escribir "[OK] Nuevo insumo agregado exitosamente al stock."
+					Leer stockId[totalStock]
+					Escribir "Ingrese nombre del insumo: "
+					Leer stockNombre[totalStock]
+					Escribir "Ingrese categoria (Hidratacion/Alimentacion/Medicamentos/Rescate/Comunicacion/Ropa): "
+					Leer stockCategoria[totalStock]
+					Escribir "Ingrese cantidad: "
+					Leer stockCantidad[totalStock]
+					Escribir "Ingrese unidad de medida (lts/kg/uds): "
+					Leer stockUnidad[totalStock]
+					Escribir "Ingrese estado (Optimo/Bajo/Critico): "
+					Leer stockEstado[totalStock]
+					Escribir "[OK] Nuevo insumo agregado al stock."
 				SiNo
-					Escribir "[ERROR] Se alcanzó el límite máximo de la matriz de stock (10 elementos)."
+					Escribir "[ERROR] Se alcanzo el limite maximo de 10 insumos."
 				FinSi
 				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
 				
 			3:
+				Si acumuladoDonaciones <= 0 Entonces
+					Escribir "[ERROR] No hay fondos disponibles. Finanzas debe registrar donaciones."
+				SiNo
+					Escribir "Ingrese el numero del insumo a comprar (1 al ", totalStock, "): "
+					Leer filaMod
+					Si filaMod >= 1 Y filaMod <= totalStock Entonces
+						Escribir "Insumo: ", stockNombre[filaMod]
+						Escribir "Costo por unidad ($): "
+						Leer costoUnitario
+						Escribir "Cantidad a comprar: "
+						Leer cantCompra
+						Si costoUnitario > 0 Y cantCompra > 0 Entonces
+							costoTotal <- costoUnitario * cantCompra
+							Escribir "Costo total: $", costoTotal
+							Si costoTotal <= acumuladoDonaciones Entonces
+								acumuladoDonaciones <- acumuladoDonaciones - costoTotal
+								stockCantidad[filaMod] <- stockCantidad[filaMod] + cantCompra
+								Escribir "[OK] Compra realizada."
+								Escribir "Nuevo stock de ", stockNombre[filaMod], ": ", stockCantidad[filaMod], " ", stockUnidad[filaMod]
+								Escribir "Fondos restantes: $", acumuladoDonaciones
+							SiNo
+								Escribir "[ERROR] Fondos insuficientes. Disponible: $", acumuladoDonaciones
+							FinSi
+						SiNo
+							Escribir "[ERROR] Costo y cantidad deben ser mayores a 0."
+						FinSi
+					SiNo
+						Escribir "[ERROR] Numero de insumo invalido."
+					FinSi
+				FinSi
+				Escribir "Presione una tecla para continuar..."
+				Esperar Tecla
+				
+			4:
+				Escribir "Volviendo..."
+				
 			De Otro Modo:
-				Escribir "Opción inválida."
+				Escribir "Opcion invalida."
 				Esperar Tecla
 		FinSegun
-	Hasta Que opStock = 3
+	Hasta Que opStock = 4
 FinSubProceso
 
 // ==========================================================
@@ -1349,7 +1386,7 @@ SubProceso finanzas(idUsuario, acumuladoDonaciones Por Referencia, misiones, can
 					acumuladoDonaciones <- acumuladoDonaciones + monto
 					Escribir "[OK] Donacion registrada. Fondos disponibles: ", acumuladoDonaciones
 				SiNo
-					Escribir "[ERROR!] El monto debe ser mayor a 0."
+					Escribir "[ERROR] El monto debe ser mayor a 0."
 				FinSi
 				Escribir ""
 				Escribir "Presione una tecla para continuar..."
@@ -1378,7 +1415,6 @@ SubProceso finanzas(idUsuario, acumuladoDonaciones Por Referencia, misiones, can
 						Leer idMisionDestino
 						idMisionDestino <- Mayusculas(idMisionDestino)
 						
-						// busca la mision -> (solo las activas)
 						posMision <- -1
 						Para i <- 1 Hasta cantidadMisiones Con Paso 1 Hacer
 							Si misiones[i,0] = idMisionDestino Y misiones[i,6] <> "Controlada" Entonces
@@ -1387,7 +1423,7 @@ SubProceso finanzas(idUsuario, acumuladoDonaciones Por Referencia, misiones, can
 						FinPara
 						
 						Si posMision = -1 Entonces
-							Escribir "[ERROR!] La mision no existe o ya esta controlada."
+							Escribir "[ERROR] La mision no existe o ya esta controlada."
 						SiNo
 							Escribir "Cantidad a enviar a ", idMisionDestino, " (maximo ", acumuladoDonaciones, "): "
 							Leer cantDistribuir
@@ -1398,7 +1434,7 @@ SubProceso finanzas(idUsuario, acumuladoDonaciones Por Referencia, misiones, can
 									Leer confirmacion
 									confirmacion <- Mayusculas(confirmacion)
 									Si confirmacion <> "S" Y confirmacion <> "N" Entonces
-										Escribir "[ERROR!] Opcion invalida. Debe ingresar S o N."
+										Escribir "[ERROR] Opcion invalida. Debe ingresar S o N."
 									FinSi
 								Hasta Que confirmacion = "S" O confirmacion = "N"
 								
@@ -1413,7 +1449,7 @@ SubProceso finanzas(idUsuario, acumuladoDonaciones Por Referencia, misiones, can
 									Escribir "[X] Distribucion cancelada."
 								FinSi
 							SiNo
-								Escribir "[ERROR!] Cantidad invalida o supera los fondos disponibles."
+								Escribir "[ERROR] Cantidad invalida o supera los fondos disponibles."
 							FinSi
 						FinSi
 					FinSi
