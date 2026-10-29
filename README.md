@@ -52,6 +52,7 @@ organización durante una crisis.
 | 🔑 Admin | Alta/baja de usuarios | *[Lautaro]* |
 | 🧭 Coordinador | Crea misiones, asigna trabajadores, descuenta stock | *[Milagros]* |
 | 🛠️ Trabajador | Ve y actualiza el estado de su misión | *[Nicolás]* |
+| 🧮 Finanzas | Ve estado financiero, registrar donación, distribuir fondos a una misión | *[Jesús]* |
 | 🤝 Colaborador | Ve misiones públicas, simula donaciones | *[Máximo]* |
 
 ---
@@ -60,9 +61,10 @@ organización durante una crisis.
 
 > Actualizado al *23/09/2026*
 
-- 🔄 **Coordinador** -- en desarrollo: Falta actualizar el cuadro el stock!!!!!.
+- 🔄 **Coordinador** -- Finalizado.
 - 🔄 **Administrador** -- en desarrollo: *[qué falta]*
 - 🔄 **Trabajador** -- en desarrollo: Verificar y controlar el estado de la misión.
+- 🔄 **Finanzas** -- Finalizado.
 - ⬜ **Colaborador** -- en desarrollo: *FuncMostrarMisiónesPúblicas*
 
 <details>
