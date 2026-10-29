@@ -59,7 +59,7 @@ organización durante una crisis.
 
 ## 📊 Estado actual del proyecto
 
-> Actualizado al *23/09/2026*
+> Actualizado al *29/10/2026*
 
 - 🔄 **Coordinador** -- Finalizado.
 - 🔄 **Administrador** -- en desarrollo: *[qué falta]*
