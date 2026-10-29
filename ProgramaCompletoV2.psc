@@ -188,7 +188,13 @@ SubProceso cargarBaseDatos(idUsuario, nombreUsuario, contrasenaUsuario, rolUsuar
     rolUsuario[3] <- "FINANZAS"
 	
 	
-    cantidadUsuarios <- 4
+	// Colaborador
+	idUsuario[4] <- "S01"
+    nombreUsuario[4] <- "ColabMax"
+    contrasenaUsuario[4] <- "max2026"
+    rolUsuario[4] <- "COLABORADOR"
+	
+    cantidadUsuarios <- 5
 	
     // ==========================================
     // PERFIL DEL ADMINISTRADOR
@@ -951,8 +957,6 @@ SubProceso crearMision(idMision, tipoMision, provinciaMision, localidadMision, d
 	Si cantidadMisiones >= maximoMisiones Entonces
 		Escribir "[ERROR] Se alcanzo el maximo de misiones permitidas."
 	SiNo
-		// Base 0: la nueva mision va en la posicion cantidadMisiones,
-		// pero su numero visible es cantidadMisiones + 1 (ej: 3 misiones -> M04)
 		i <- cantidadMisiones
 		
 		Si i + 1 < 10 Entonces
@@ -972,7 +976,7 @@ SubProceso crearMision(idMision, tipoMision, provinciaMision, localidadMision, d
 		Escribir "Descripcion: "
 		Leer descripcionMision[i]
 		
-		// Repite hasta que se elija una urgencia valida
+		// repite hasta que se elija una urgencia valida
 		Repetir
 			Escribir "Nivel de urgencia [1] BAJA   [2] MEDIA   [3] ALTA: "
 			Leer urgencia
@@ -1024,7 +1028,6 @@ SubProceso crearMision(idMision, tipoMision, provinciaMision, localidadMision, d
 			Escribir "----------------------------------------------------------"
 			Escribir "  [X] MISION CANCELADA. Los datos no se guardaron."
 			Escribir "----------------------------------------------------------"
-			// (en el original usaba "pos", que no existe: se limpia la posicion i)
 			idMision[i] <- ""
 			tipoMision[i] <- ""
 			provinciaMision[i] <- ""
@@ -1060,7 +1063,7 @@ SubProceso mostrarMisionesActivas(idMision, tipoMision, provinciaMision, localid
 	Escribir "----------------------------------------------------------"
 FinSubProceso
 
-// ======================================= Devuelve la mision de un trabajador ("" si esta libre)
+// ======================================= devuelve la mision de un trabajador
 Funcion misionActual <- misionDeTrabajador(trabajadorAsignado, misionAsignada, cantidadAsignaciones, idBuscado)
 	Definir misionActual Como Caracter
 	Definir i Como Entero
@@ -1072,7 +1075,7 @@ Funcion misionActual <- misionDeTrabajador(trabajadorAsignado, misionAsignada, c
 	FinPara
 FinFuncion
 
-// ======================================= Asignar trabajadores
+// ======================================= asignar trabajadores
 SubProceso asignarTrabajadores(idMision, tipoMision, provinciaMision, prioridadMision, estadoMision, cantidadMisiones, idTrabajador, nombreTrabajador, apellidoTrabajador, cantidadTrabajadores, misionAsignada, trabajadorAsignado, cantidadAsignaciones Por Referencia, cantidadTrabajadoresPorMision, maximoTrabajadoresPorMision, maximoAsignaciones)
 	Definir confirmacion, idMisionBuscada, idTrabajadorBuscado, misionOcupada Como Caracter
 	Definir i, j, posMision, posTrabajador, activas Como Entero
@@ -1085,7 +1088,7 @@ SubProceso asignarTrabajadores(idMision, tipoMision, provinciaMision, prioridadM
 		Si cantidadTrabajadores = 0 Entonces
 			Escribir "No hay trabajadores cargados."
 		SiNo
-			// ---- Listado de misiones (solo las no controladas) ----
+			// listado de misiones (solo las no controladas)
 			Escribir "MISIONES DISPONIBLES:"
 			Escribir "----------------------------------------------------------"
 			activas <- 0
@@ -1100,7 +1103,7 @@ SubProceso asignarTrabajadores(idMision, tipoMision, provinciaMision, prioridadM
 			Si activas = 0 Entonces
 				Escribir "No hay misiones activas para asignar."
 			SiNo
-				// ---- Se elige la mision por ID (asi no hay confusion con los indices) ----
+				// se elige la mision por id (asi no hay confusion con los indices)
 				posMision <- -1
 				Repetir
 					Escribir "Ingrese el ID de la mision (ej: M01) o 0 para cancelar: "
@@ -1122,7 +1125,7 @@ SubProceso asignarTrabajadores(idMision, tipoMision, provinciaMision, prioridadM
 					Si cantidadTrabajadoresPorMision[posMision] >= maximoTrabajadoresPorMision Entonces
 						Escribir "[ERROR] La mision ", idMision[posMision], " ya tiene el maximo de ", maximoTrabajadoresPorMision, " trabajadores."
 					SiNo
-						// ---- Listado de trabajadores con su situacion ----
+						// listado de trabajadores con su situacion
 						Escribir ""
 						Escribir "LISTA DE TRABAJADORES:"
 						Escribir "----------------------------------------------------------"
@@ -1377,7 +1380,6 @@ FinFuncion
 //                        FINANZAS
 // ==========================================================
 
-//FALTA - Pasar lo que queda a vectores!
 SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, tipoMision, provinciaMision, estadoMision, cantidadMisiones, donacionesPorMision)
 	Definir opFinanzas, monto, cantDistribuir, i, posMision, totalDistribuido Como Entero
 	Definir idMisionDestino, confirmacion Como Caracter
@@ -1458,7 +1460,7 @@ SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, ti
 						Leer idMisionDestino
 						idMisionDestino <- Mayusculas(idMisionDestino)
 						
-						// Busca la mision (solo las activas)
+						// busca la mision (solo las activas)
 						posMision <- -1
 						Para i <- 0 Hasta cantidadMisiones - 1 Con Paso 1 Hacer
 							Si idMision[i] = idMisionDestino Y estadoMision[i] <> "Controlada" Entonces
