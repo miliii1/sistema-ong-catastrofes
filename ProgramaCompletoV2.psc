@@ -34,11 +34,11 @@ Algoritmo ProgramaUnificado
 	// 					 VECTORES USUARIOS
 	// ==========================================================
 	Definir idUsuario, nombreUsuario Como Caracter
-	Definir contraseÃ±aUsuario, rolUsuario Como Caracter
+	Definir contraseñaUsuario, rolUsuario Como Caracter
 	
 	Dimension idUsuario[maximoUsuarios]
 	Dimension nombreUsuario[maximoUsuarios]
-	Dimension contraseÃ±aUsuario[maximoUsuarios]
+	Dimension contraseñaUsuario[maximoUsuarios]
 	Dimension rolUsuario[maximoUsuarios]
 	
 	// ==========================================================
@@ -106,7 +106,7 @@ Algoritmo ProgramaUnificado
 	//=============================================
 	// 			CARGAR BASE DE DATOS
 	//=============================================
-	cargarBaseDatos(idUsuario, nombreUsuario, contraseÃ±aUsuario, rolUsuario, cantidadUsuarios, idAdministrador, nombreAdministrador, apellidoAdministrador, cantidadAdministradores, idTrabajador, nombreTrabajador, apellidoTrabajador, cantidadTrabajadores, idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, cantidadMisiones, misionAsignada, trabajadorAsignado, cantidadTrabajadoresPorMision, cantidadAsignaciones, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock)
+	cargarBaseDatos(idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, cantidadUsuarios, idAdministrador, nombreAdministrador, apellidoAdministrador, cantidadAdministradores, idTrabajador, nombreTrabajador, apellidoTrabajador, cantidadTrabajadores, idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, cantidadMisiones, misionAsignada, trabajadorAsignado, cantidadTrabajadoresPorMision, cantidadAsignaciones, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock)
 	
 	
 	Repetir 
@@ -125,9 +125,9 @@ Algoritmo ProgramaUnificado
 		Leer num
 		Segun num Hacer
 			1:
-				filaUsuario <- iniciarSesion(idUsuario, nombreUsuario, contraseÃ±aUsuario, maximoUsuarios, cantidadUsuarios)
+				filaUsuario <- iniciarSesion(idUsuario, nombreUsuario, contraseñaUsuario, maximoUsuarios, cantidadUsuarios)
 				si filaUsuario <> -1 Entonces
-					elegirPerfilUsuario(filaUsuario, idUsuario, nombreUsuario, contraseÃ±aUsuario, rolUsuario, cantidadUsuarios, maximoUsuarios, cantidadAdministradores, idAdministrador, maximoAdministradores, nombreAdministrador, apellidoAdministrador, idTrabajador, nombreTrabajador, apellidoTrabajador, cantidadTrabajadores, maximoTrabajadores, cantidadMisiones, cantidadTrabajadoresPorMision, misionAsignada, idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, trabajadorAsignado, cantidadAsignaciones, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock, acumuladoDonaciones, donacionesPorMision, maximoMisiones, maximoTrabajadoresPorMision, maximoAsignaciones)
+					elegirPerfilUsuario(filaUsuario, idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, cantidadUsuarios, maximoUsuarios, cantidadAdministradores, idAdministrador, maximoAdministradores, nombreAdministrador, apellidoAdministrador, idTrabajador, nombreTrabajador, apellidoTrabajador, cantidadTrabajadores, maximoTrabajadores, cantidadMisiones, cantidadTrabajadoresPorMision, misionAsignada, idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, trabajadorAsignado, cantidadAsignaciones, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock, acumuladoDonaciones, donacionesPorMision, maximoMisiones, maximoTrabajadoresPorMision, maximoAsignaciones)
 				FinSi
 			2:
 				Borrar Pantalla 
@@ -155,7 +155,7 @@ FinAlgoritmo
 //                  BASE DE DATOS FALSA
 // ==========================================================
 
-SubProceso cargarBaseDatos(idUsuario, nombreUsuario, contrasenaUsuario, rolUsuario, cantidadUsuarios Por Referencia, idAdministrador , nombreAdministrador, apellidoAdministrador, cantidadAdministradores Por Referencia, idTrabajador, nombreTrabajador, apellidoTrabajador, cantidadTrabajadores Por Referencia, idMision Por Referencia, tipoMision Por Referencia, provinciaMision Por Referencia, localidadMision Por Referencia, descripcionMision, prioridadMision, estadoMision, cantidadMisiones Por Referencia, misionAsignada, trabajadorAsignado, cantidadTrabajadoresPorMision Por Referencia, cantidadAsignaciones Por Referencia, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia)
+SubProceso cargarBaseDatos(idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, cantidadUsuarios Por Referencia, idAdministrador , nombreAdministrador, apellidoAdministrador, cantidadAdministradores Por Referencia, idTrabajador, nombreTrabajador, apellidoTrabajador, cantidadTrabajadores Por Referencia, idMision Por Referencia, tipoMision Por Referencia, provinciaMision Por Referencia, localidadMision Por Referencia, descripcionMision, prioridadMision, estadoMision, cantidadMisiones Por Referencia, misionAsignada, trabajadorAsignado, cantidadTrabajadoresPorMision Por Referencia, cantidadAsignaciones Por Referencia, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia)
 	
 	cargarStock(stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock)
 	
@@ -166,34 +166,32 @@ SubProceso cargarBaseDatos(idUsuario, nombreUsuario, contrasenaUsuario, rolUsuar
     // Administrador
     idUsuario[0] <- "A01"
     nombreUsuario[0] <- "N1colas"
-    contrasenaUsuario[0] <- "Pepito_"
+    contraseñaUsuario[0] <- "Pepito_"
     rolUsuario[0] <- "ADMINISTRADOR"
 	
     // Trabajador
     idUsuario[1] <- "T03"
     nombreUsuario[1] <- "zNiko"
-    contrasenaUsuario[1] <- "123"
+    contraseñaUsuario[1] <- "123"
     rolUsuario[1] <- "TRABAJADOR"
 	
     // Coordinador
     idUsuario[2] <- "C01"
     nombreUsuario[2] <- "CoordAnakin"
-    contrasenaUsuario[2] <- "anakin2026"
+    contraseñaUsuario[2] <- "anakin2026"
     rolUsuario[2] <- "COORDINADOR"
 	
 	// Finanzas
 	idUsuario[3] <- "F01"
-    nombreUsuario[3] <- "FinanAna"
-    contrasenaUsuario[3] <- "ana2026"
-    rolUsuario[3] <- "FINANZAS"
+	nombreUsuario[3] <- "FinanzasAna"
+	contraseñaUsuario[3] <- "ana2026"
+	rolUsuario[3] <- "FINANZAS"
 	
-	
-	// Colaborador
-	idUsuario[4] <- "S01"
-    nombreUsuario[4] <- "ColabMax"
-    contrasenaUsuario[4] <- "max2026"
-    rolUsuario[4] <- "COLABORADOR"
-	
+	//Colaborador
+	idUsuario[4] <- "C01"
+	nombreUsuario[4] <- "Colaborador2026"
+	contraseñaUsuario[4] <- "123"
+	rolUsuario[4] <- "COLABORADOR"
     cantidadUsuarios <- 5
 	
     // ==========================================
@@ -325,9 +323,9 @@ FinSubProceso
 //                         USUARIOS
 // ==========================================================
 
-Funcion posUsuario <- iniciarSesion(idUsuario, nombreUsuario, contraseÃ±aUsuario, maxUsuarios, cantUsuarios)
+Funcion posUsuario <- iniciarSesion(idUsuario, nombreUsuario, contraseñaUsuario, maxUsuarios, cantUsuarios)
 	
-	Definir nombreIngresado, contraseÃ±aIngresada Como Caracter
+	Definir nombreIngresado, contraseñaIngresada Como Caracter
 	Definir maximoIntentos como Entero
 	Definir cantidadIntentos, posUsuario Como Entero
 	Definir sesionIniciada Como Logico
@@ -370,15 +368,15 @@ Funcion posUsuario <- iniciarSesion(idUsuario, nombreUsuario, contraseÃ±aUsuario
 				Escribir ""
 				Escribir "Bienvenido usuario ", nombreIngresado
 				Escribir ""
-				Escribir "Ingrese su contraseÃ±a: "
-				Leer contraseÃ±aIngresada
-				Si	validarContraseÃ±a(posUsuario, contraseÃ±aIngresada, contraseÃ±aUsuario) Entonces
+				Escribir "Ingrese su contraseña: "
+				Leer contraseñaIngresada
+				Si	validarContraseña(posUsuario, contraseñaIngresada, contraseñaUsuario) Entonces
 					sesionIniciada <- Verdadero
 				Sino
 					Limpiar Pantalla
 					cantidadIntentos <- cantidadIntentos + 1
 					Escribir ""
-					Escribir "[ERROR] ContraseÃ±a incorrecta."
+					Escribir "[ERROR] Contraseña incorrecta."
 					Si cantidadIntentos <= maximoIntentos Entonces
 						Escribir "Intentos restantes: ", (maximoIntentos - cantidadIntentos)
 					FinSi
@@ -418,34 +416,35 @@ Funcion fila <- buscarUsuario (nombreBuscado, nombreUsuarios, cantUsuarios)
 	FinMientras
 FinFuncion
 
-Funcion esCorrecto <- validarContraseÃ±a(posUsuario, contraseÃ±a, contraseÃ±aUsuario)
+Funcion esCorrecto <- validarContraseña(posUsuario, contraseña, contraseñaUsuario)
 	Definir i Como Entero
 	Definir esCorrecto Como Logico
 	
 	esCorrecto <- Falso
 	
-	Si	contraseÃ±aUsuario[posUsuario] = contraseÃ±a Entonces
+	Si	contraseñaUsuario[posUsuario] = contraseña Entonces
 		esCorrecto <- Verdadero
 	FinSi
 FinFuncion
 
-SubProceso elegirPerfilUsuario (filaUsuario, idUsuario, nombreUsuario, contraseÃ±aUsuario, rolUsuario, cantidadUsuario Por Referencia, maximoUsuarios, cantidadAdministradores Por Referencia, maxAdministradores, idAdministrador, nombreAdministrador, apellidoAdministrador, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajadores por Referencia, maxTrabajadores, cantidadMisiones, cantTrabajadoresPorMision, misionAsignada, idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, trabajadorAsignado, cantidadAsignaciones Por Referencia, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia, acumuladoDonaciones Por Referencia, donacionesPorMision, maximoMisiones, maximoTrabajadoresPorMision, maximoAsignaciones)
+SubProceso elegirPerfilUsuario (filaUsuario, idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, cantidadUsuario Por Referencia, maximoUsuarios, cantidadAdministradores Por Referencia, maxAdministradores, idAdministrador, nombreAdministrador, apellidoAdministrador, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajadores por Referencia, maxTrabajadores, cantidadMisiones, cantTrabajadoresPorMision, misionAsignada, idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, trabajadorAsignado, cantidadAsignaciones Por Referencia, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia, acumuladoDonaciones Por Referencia, donacionesPorMision, maximoMisiones, maximoTrabajadoresPorMision, maximoAsignaciones)
 	
-    // Ejecutar el mÃ³dulo segÃºn el rol
+    // Ejecutar el módulo según el rol
     Segun rolUsuario[filaUsuario] Hacer
         "ADMINISTRADOR":
-            administrador(filaUsuario, idUsuario[filaUsuario], idUsuario, nombreUsuario, contraseÃ±aUsuario, rolUsuario, cantidadUsuario, maximoUsuarios, cantidadAdministradores, idAdministrador, maxAdministradores, nombreAdministrador, apellidoAdministrador, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajadores, maxTrabajadores)
+            administrador(idUsuario[filaUsuario], idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, cantidadUsuario, maximoUsuarios, cantidadAdministradores, idAdministrador, maxAdministradores, nombreAdministrador, apellidoAdministrador, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajadores, maxTrabajadores)
         "TRABAJADOR":
             trabajador(idUsuario[filaUsuario], idTrabajador, nombreTrabajador, apellidoTrabajador, idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, cantidadMisiones, cantTrabajadoresPorMision, misionAsignada, trabajadorAsignado, cantTrabajadores, cantidadAsignaciones)
-		"COORDINADOR":
+        "COORDINADOR":
             coordinador(idUsuario[filaUsuario], idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, cantidadMisiones, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajadores, misionAsignada, trabajadorAsignado, cantidadAsignaciones, cantTrabajadoresPorMision, maximoMisiones, maximoTrabajadoresPorMision, maximoAsignaciones, stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock, acumuladoDonaciones)
         "COLABORADOR":
-            //colaborador(idUsuario, misiones, cantidadMisiones)
+            colaborador(idUsuario[filaUsuario], idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, cantidadMisiones, stockId, stockNombre, stockCantidad, stockUnidad, totalStock, acumuladoDonaciones, donacionesPorMision)
         "FINANZAS":
-            finanzas(idUsuario[filaUsuario], acumuladoDonaciones, idMision, tipoMision, provinciaMision, estadoMision, cantidadMisiones, donacionesPorMision)
+           finanzas(idUsuario[filaUsuario], acumuladoDonaciones, idMision, tipoMision, estadoMision, cantidadMisiones, donacionesPorMision)
         De Otro Modo:
             Escribir "[ERROR] El ID no tiene un rol reconocido."
             Esperar Tecla
+			
     FinSegun
 FinSubProceso
 
@@ -461,10 +460,10 @@ SubProceso trabajador (trabajadorBuscado, idTrabajador, nombreTrabajador, apelli
 	//          INGRESO Y SELECCION DEL TRABAJADOR
 	//==========================================================
 	Limpiar Pantalla
-	Si cantTrabajadores <> 0 Entonces
-		// Busca la misiÃ³n asignada al trabajador seleccionado
+		// Busca la misión asignada al trabajador seleccionado
 		posMisionAsignada <- buscarMisionTrabajador(trabajadorBuscado, idTrabajador, cantAsignaciones, cantMisiones, trabajadorAsignado, misionAsignada, idMision, cantTrabajadores, posTrabajadorAsignado)
 		// Inicia el panel correspondiente al trabajador
+	Si posTrabajadorAsignado <> -1 Entonces
 		menuTrabajador(idMision, posMisionAsignada, idTrabajador, posTrabajadorAsignado, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, nombreTrabajador, apellidoTrabajador, cantMisiones)
 	SiNo
 		Escribir ""
@@ -487,35 +486,31 @@ Funcion indiceMisionAsignada <- buscarMisionTrabajador(trabajadorBuscado, idTrab
 	indiceMisionAsignada <- -1
 	posTrabajadorAsignado <- -1
 	
-	// Buscar una asignacion del trabajador
-	Mientras i < cantAsignaciones Y indiceMisionAsignada = -1 Hacer
-		Si trabajadorAsignado[i] = trabajadorBuscado Entonces
-			// Obtener la misiÃ³n asociada a esa asignaciÃ³n.
-			misionBuscada <- misionAsignada[i]
-			// Buscar el ID de la misiÃ³n en el vector de misiones.
-			j <- 0
-			Escribir "Trabajador buscado: ", trabajadorBuscado
-			Escribir "Asignaciones registradas: ", cantAsignaciones
-			Escribir "Trabajador en indice ", i, ": ", trabajadorAsignado[i]
-			Esperar Tecla
-			Mientras j < cantidadMisiones Y indiceMisionAsignada = -1 Hacer
-				Si idMision[j] = misionBuscada Entonces
-					indiceMisionAsignada <- j
-				SiNo
-					j <- j + 1
-				FinSi
-			FinMientras
-		FinSi
-		i <- i + 1
-	FinMientras
-	i <- 0
-	Mientras i < cantTrabajadores Y posTrabajadorAsignado = -1 Hacer
-		Si idTrabajador[i] = trabajadorBuscado Entonces
-			posTrabajadorAsignado <- i
-		SiNo
+		// Buscar una asignacion del trabajador
+		Mientras i < cantAsignaciones Y indiceMisionAsignada = -1 Hacer
+			Si trabajadorAsignado[i] = trabajadorBuscado Entonces
+				// Obtener la misión asociada a esa asignación.
+				misionBuscada <- misionAsignada[i]
+				// Buscar el ID de la misión en el vector de misiones.
+				j <- 0
+				Mientras j < cantidadMisiones Y indiceMisionAsignada = -1 Hacer
+					Si idMision[j] = misionBuscada Entonces
+						indiceMisionAsignada <- j
+					SiNo
+						j <- j + 1
+					FinSi
+				FinMientras
+			FinSi
 			i <- i + 1
-		FinSi
-	FinMientras
+		FinMientras
+		i <- 0
+		Mientras i < cantTrabajadores Y posTrabajadorAsignado = -1 Hacer
+			Si idTrabajador[i] = trabajadorBuscado Entonces
+				posTrabajadorAsignado <- i
+			SiNo
+				i <- i + 1
+			FinSi
+		FinMientras
 FinFuncion
 
 SubProceso menuTrabajador(idMision, posMisionAsig, idTrabajador, posTrabajadorAsig, tipoMision, provMision, localidadMision, descripMision, prioriMision, estadoMision, nomTrabajador, apeTrabajador, cantMisiones)
@@ -526,7 +521,7 @@ SubProceso menuTrabajador(idMision, posMisionAsig, idTrabajador, posTrabajadorAs
 		Escribir "=========================================================="
 		Escribir "                 MENU DEL TRABAJADOR"
 		Escribir "=========================================================="
-		Escribir "ID: ", idTrabajador[posTrabajadorAsig]
+		
 		Escribir "Bienvenido ", nomTrabajador[posTrabajadorAsig], " ", apeTrabajador[posTrabajadorAsig]
 		Escribir ""
 		Escribir "[1] Ver mision asignada"
@@ -593,7 +588,7 @@ SubProceso verEstado(idMision, posMisionAsig, estadoMision, cantMisiones)
 	Escribir "+----------------------------------------------------------+"
 	Escribir "|                    ESTADO DE MISION                      |"
 	Escribir "+----------------------------------------------------------+"
-	
+		
 	Si posMisionAsig >= 0 Y posMisionAsig < cantMisiones Entonces
 		Escribir "| Mision: ", idMision[posMisionAsig]
 		Escribir "| Estado actual: ", estadoMision[posMisionAsig]
@@ -685,139 +680,204 @@ FinSubProceso
 //                        ADMINISTRADOR
 // ==========================================================
 
-SubProceso administrador(posUsuario, idRolUsuario, idUsuario, nombreUsuario, contraseÃ±aUsuario, rolUsuario, cantUsuarios Por Referencia, maxUsuarios, cantidadAdministradores Por Referencia, maxAdministradores, idAdministrador, nombreAdministrador, apellidoAdministrador, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajador Por Referencia, maxTrabajadores)
+SubProceso administrador(idRolUsuario, idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, cantUsuarios Por Referencia, maxUsuarios, cantidadAdministradores Por Referencia, maxAdministradores, idAdministrador, nombreAdministrador, apellidoAdministrador, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajador Por Referencia, maxTrabajadores)
 	
 	Definir opcion Como Entero
 	Definir id, asegurar Como Logico
+	Definir posAdministrador, i Como Entero
 	
-	Repetir
-		//FALTA - Buscar el ID del administrador y la posicion del vector (Muestra el nombre y apellido pero en la posicion del usuario, no del administrador)
-		Limpiar Pantalla
-		Escribir cantidadAdministradores
-		Escribir "======================================"
-		Escribir "          ADMINISTRADORES"
-		Escribir "======================================"
-		Escribir "Bienvenido: ", nombreAdministrador[posUsuario], " ", apellidoAdministrador[posUsuario]
-		Escribir "1. Agregar usuario"
-		Escribir "2. Quitar trabajador"
-		Escribir "3. Quitar mision"
-		Escribir "5. Salir"
-		Escribir "======================================"
-		Escribir "Ingrese una opcion: "
-		Leer opcion
-		
-		Segun opcion Hacer
-			
-			1:
-				AgregarUsuario(idRolUsuario, idUsuario, nombreUsuario, contraseÃ±aUsuario, rolUsuario, idAdministrador, nombreAdministrador, apellidoAdministrador, cantidadAdministradores, maxAdministradores, cantUsuarios, maxUsuarios, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajador, maxTrabajadores)
-			2:
-				EliminarTrabajadores(misiones, trabajadores, cantTrabajadoresAsignados, trabajadoresAsignados, cantMisiones,cantTrabajadores)
-			3:
-				
-			5:
-				Escribir "Saliendo del menu..."
-				
-			De Otro Modo:
-				Escribir "Opcion invalida."
-				
-		FinSegun
-		
-		Si opcion <> 5 Entonces
-			Escribir ""
-			Escribir "Presione una tecla para continuar..."
-			Esperar Tecla
+	// Buscar el perfil a partir del ID que inicio sesion.
+	posAdministrador <- -1
+	i <- 0
+	Mientras i < cantidadAdministradores Y posAdministrador = -1 Hacer
+		Si idAdministrador[i] = idRolUsuario Entonces
+			posAdministrador <- i
+		SiNo
+			i <- i + 1
 		FinSi
-	Hasta Que opcion = 5
+	FinMientras
+	
+	Si posAdministrador = -1 Entonces
+		Limpiar Pantalla
+        Escribir "+----------------------------------------------------------+"
+        Escribir "|                         [ERROR]                          |"
+        Escribir "+----------------------------------------------------------+"
+        Escribir "| No se encontro el perfil del administrador.              |"
+        Escribir "| ID recibido: ", idRolUsuario
+        Escribir "+----------------------------------------------------------+"
+        Escribir ""
+        Escribir "Presione una tecla para continuar..."
+        Esperar Tecla
+	SiNo
+		Repetir
+			//FALTA - Buscar el ID del administrador y la posicion del vector (Muestra el nombre y apellido pero en la posicion del usuario, no del administrador)
+			Limpiar Pantalla
+			Escribir "======================================"
+			Escribir "          ADMINISTRADORES"
+			Escribir "======================================"
+			Escribir "Bienvenido: ", nombreAdministrador[posAdministrador], " ", apellidoAdministrador[posAdministrador]
+			Escribir ""
+			Escribir " [1] Agregar usuario"
+            Escribir " [2] Quitar trabajador"
+            Escribir " [3] Cerrar sesion"
+			Escribir "--------------------------------------"
+			Escribir "Ingrese una opcion: "
+			Leer opcion
+			
+			Segun opcion Hacer
+				
+				1:
+					agregarUsuario(idRolUsuario, idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, idAdministrador, nombreAdministrador, apellidoAdministrador, cantidadAdministradores, maxAdministradores, cantUsuarios, maxUsuarios, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajador, maxTrabajadores)
+				2:
+					eliminarTrabajadores(idRolUsuario, idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, idAdministrador, nombreAdministrador, apellidoAdministrador, cantidadAdministradores, maxAdministradores, cantUsuarios, maxUsuarios)
+				3:
+					Escribir "Saliendo del menu..."
+					
+				De Otro Modo:
+					Escribir "Opcion invalida."
+					
+			FinSegun
+			
+			Si opcion <> 3 Entonces
+				Escribir ""
+				Escribir "Presione una tecla para continuar..."
+				Esperar Tecla
+			FinSi
+		Hasta Que opcion = 3
+	FinSi
+	
 FinSubProceso
 
-SubProceso AgregarUsuario(idRolUsuario, idUsuario, nombreUsuario, contraseÃ±aUsuario, rolUsuario, idAdministrador, nombreAdministrador, apellidoAdministrador, cantidadAdministradores Por Referencia, maxAdministradores, cantUsuarios Por Referencia, maxUsuarios, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajador, maxTrabajador)
-	Definir rol,nombyap, contra Como Caracter
+SubProceso agregarUsuario(idRolUsuario, idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, idAdministrador, nombreAdministrador, apellidoAdministrador, cantidadAdministradores Por Referencia, maxAdministradores, cantUsuarios Por Referencia, maxUsuarios, idTrabajador, nombreTrabajador, apellidoTrabajador, cantTrabajadores Por Referencia, maxTrabajador)
+	Definir rol, contra Como Caracter
 	definir i,pos,j  Como Entero
 	Definir numeroNuevoTrabajador Como Entero
+	Definir confirmar Como Logico
 	
 	numeroNuevoTrabajador <- 0
 	
-	Escribir "+----------------------------------------------------------+"
-	Escribir "|                        USUARIOS                          |"
-	Escribir "+----------------------------------------------------------+"
-	Escribir ""
 	Repetir
-		Escribir "Ingrese el rol del usuario que quiere agregar: T(trabajador), A(administrador) y C(Contribuidor)"
-		leer rol
-		rol <- Mayusculas(rol)
-		Mientras rol <> "T" y rol <> "A" y rol <> "C" y rol <> "S" Hacer
-			Escribir "[ERROR] Ingreso mal el rol del usuario"
-			Escribir "Presione cualquier tecla para continuar"
-			Esperar Tecla 
-		FinMientras
+        Limpiar Pantalla
+        Escribir "+----------------------------------------------------------+"
+        Escribir "|                     AGREGAR USUARIO                      |"
+        Escribir "+----------------------------------------------------------+"
+        Escribir "| [A] Administrador                                        |"
+		Escribir "| [T] Trabajador                                           |"
+        Escribir "| [S] Volver al menu                                       |"
+        Escribir "+----------------------------------------------------------+"
+        Escribir "Seleccione el rol: "
+        Leer rol
 		
-		Si cantUsuarios < maxUsuarios Entonces //continuar
+        rol <- Mayusculas(rol)
+		
+        Si rol <> "T" Y rol <> "A" Y rol <> "S" Entonces
+            Escribir ""
+            Escribir "[ERROR] Rol invalido. Ingrese T, A o S."
+            Esperar Tecla
+        FinSi
+    Hasta Que rol = "T" O rol = "A" O rol = "S"
+	Si cantUsuarios >= maxUsuarios Entonces
+		Escribir ""
+		Escribir "[ERROR] Se alcanzo el maximo de usuarios."
+		Esperar Tecla
+	SiNo
+		// ==============================================
+		// DATOS COMUNES DE USUARIOS
+		// ==============================================
+		Escribir ""
+		Escribir "Ingrese el nombre de usuario: "
+		Leer nombreUsuario[cantUsuarios]
+		
+		Escribir "Ingrese la contraseña: "
+		Leer contraseñaUsuario[cantUsuarios]
+		
+		Escribir "Confirme la contrasena: "
+		Leer contra
+		
+		Si contra <> contraseñaUsuario[cantUsuarios] Entonces
+			Escribir ""
+			Escribir "[ERROR] Las contrasenas no coinciden."
+			Escribir "No se registro el usuario."
+			Esperar Tecla
+		SiNo
+			// ==============================================
+			// DATOS ESPECIFICOS SEGUN EL PERFIL
+			// ==============================================
 			
-			//FALTA - Agregar los roles que faltan
 			Segun rol Hacer
-				"T":
-					Escribir cantUsuarios
-					Escribir cantTrabajador
-					Esperar Tecla
-					
-					Limpiar Pantalla
-					
-					Si cantTrabajador < maxTrabajador Entonces
-						idTrabajador[cantTrabajador] <- "T0" + ConvertirATexto(cantTrabajador)
-						
-						Escribir "Ingrese el nombre del Trabajador"
-						Leer nombreTrabajador[cantTrabajador]
-						Escribir "Ingrese el apellido del Trabajador"
-						Leer apellidoTrabajador[cantTrabajador]
-						
-						idUsuario[cantUsuarios] <- "T0" + ConvertirATexto(cantTrabajador)
-						Escribir "Ingrese el nombre del Usuario"
-						Leer nombreUsuario[cantUsuarios]
-						Escribir "Ingrese la contraseÃ±a del Usuario"
-						Leer contraseÃ±aUsuario[cantUsuarios]
-						rolUsuario[cantUsuarios] <- "TRABAJADOR"
-					FinSi
-					cantTrabajador <- cantTrabajador + 1
-					cantUsuarios <- cantUsuarios + 1
 				"A":
 					Limpiar Pantalla
-					Si cantidadAdministradores < maxAdministradores Entonces
-						
-						idAdministrador[cantidadAdministradores] <- "A0" + ConvertirATexto(cantidadAdministradores)
-						Escribir "Ingrese nombre del Administrador"
+					Escribir "+----------------------------------------------------------+"
+					Escribir "|                     AGREGAR USUARIO                      |"
+					Escribir "+----------------------------------------------------------+"
+					Si cantidadAdministradores >= maxAdministradores Entonces
+						Escribir "[ERROR] Se alcanzo el maximo de administradores."
+						confirmar <- Falso
+					Sino
+						confirmar <- Verdadero
+						Escribir "Ingrese el nombre del administrador: "
 						Leer nombreAdministrador[cantidadAdministradores]
-						Escribir "Ingrese apellido del Administrador"
+						
+						Escribir "Ingrese el apellido del administrador: "
 						Leer apellidoAdministrador[cantidadAdministradores]
-						idUsuario[cantUsuarios] <- "A0" + ConvertirATexto(cantidadAdministradores)
-						Escribir "Ingrese el nuevo nombre de usuario: "
-						Leer nombreUsuario[cantUsuarios]
-						Escribir "Ingrese la contraseÃ±a: "
-						Leer contraseÃ±aUsuario[cantUsuarios]
-						Escribir "Ingrese nuevamente la contraseÃ±a para confirmar: "
-						Leer contra
-						rolUsuario[cantUsuarios] <- "ADMINISTRADOR"
-						Si contra <> contraseÃ±aUsuario[cantUsuarios] Entonces
-							Escribir "[ERROR] La contraseÃ±a ingresada no coincide"
+						
+						Si cantidadAdministradores + 1 >= 10 Entonces
+							idAdministrador[cantidadAdministradores] <- "A" + ConvertirATexto(cantidadAdministradores+1)
+						SiNo
+							idAdministrador[cantidadAdministradores] <- "A0" + ConvertirATexto(cantidadAdministradores+1)
 						FinSi
-					SiNo
-						Escribir "No se puede agregar mas bro, nt"
+						rolUsuario[cantUsuarios] <- "ADMINISTRADOR"
+						idUsuario[cantUsuarios] <- idAdministrador[cantidadAdministradores]
+						cantidadAdministradores <- cantidadAdministradores + 1
 					FinSi
-					cantidadAdministradores <- cantidadAdministradores + 1
-					cantUsuarios <- cantUsuarios + 1
+				"T":
+					Limpiar Pantalla
+					Escribir "+----------------------------------------------------------+"
+					Escribir "|                     AGREGAR USUARIO                      |"
+					Escribir "+----------------------------------------------------------+"
+					Si cantTrabajadores >= maxTrabajador Entonces
+						Escribir "[ERROR] Se alcanzo el maximo de trabajadores."
+						confirmar <- Falso
+					Sino
+						confirmar <- Verdadero
+						Escribir "Ingrese el nombre del trabajador: "
+						Leer nombreTrabajador[cantTrabajadores]
+						
+						Escribir "Ingrese el apellido del trabajador: "
+						Leer apellidoTrabajador[cantTrabajadores]
+						
+						Si cantTrabajadores + 1 >= 10 Entonces
+							idTrabajador[cantTrabajadores] <- "T" + ConvertirATexto(cantTrabajadores+1)
+						SiNo
+							idTrabajador[cantTrabajadores] <- "T0" + ConvertirATexto(cantTrabajadores+1)
+						FinSi
+						rolUsuario[cantUsuarios] <- "TRABAJADOR"
+						idUsuario[cantUsuarios] <- idTrabajador[cantTrabajadores]
+						cantTrabajadores <- cantTrabajadores + 1
+					FinSi
 			FinSegun
-			Escribir nombreUsuario[1]
-			Escribir cantUsuarios
-			Esperar Tecla
+			Si confirmar Entonces
+				cantUsuarios <- cantUsuarios + 1
+				Escribir ""
+				Escribir "[OK] Usuario registrado correctamente."
+			SiNo
+				Escribir ""
+				Escribir "[ERROR] No se registro el usuario."
+			FinSi
 		FinSi
-	Hasta Que rol="S"
+	FinSi
 FinSubProceso
 
-SubProceso EliminarTrabajadores(misiones, trabajadores, cantTrabajadoresAsignados, trabajadoresAsignados, cantMisiones Por Referencia, cantTrabajadores Por Referencia)
-	//FALTA - Pasarlo a vectores (La logica esta bien, pero esta aplicado en matrices)
+SubProceso eliminarTrabajadores(idRolUsuario, idUsuario, nombreUsuario, contraseñaUsuario, rolUsuario, idAdministrador, nombreAdministrador, apellidoAdministrador, cantidadAdministradores Por Referencia, maxAdministradores, cantidadUsuarios Por Referencia, maxUsuarios)
 	Definir verif,asegurar,pos1 Como Caracter
 	definir i,j,temp,pos Como Entero
+	Definir rol,nombyap, contra,datusuario Como Caracter
+	definir pos3  Como Entero
+	Definir numeroNuevoTrabajador Como Entero
+	definir verificador Como Logico
+	verificador<-Falso
+	
 	Repetir
-		menu(trabajadores,cantTrabajadores)
 		Escribir "Quiere eliminar a un trabajador? S/N"
 		leer asegurar
 		asegurar<-mayusculas(asegurar)
@@ -829,72 +889,34 @@ SubProceso EliminarTrabajadores(misiones, trabajadores, cantTrabajadoresAsignado
 			Hasta Que asegurar="S" o asegurar="N"
 		FinSi
 		si asegurar<>"N" entonces
-			si cantTrabajadores<>0 Entonces
-				Escribir "Ingrese la id del trabajador que desea eliminar"
-				Leer pos1
-				pos <- ConvertirANumero(Subcadena(pos1, 2, Longitud(pos1)))
-				Para i <- 1 Hasta cantTrabajadores Hacer
-					Si trabajadores(i,0) = pos1 Entonces
-						pos <- i
+			Escribir "+----------------------------------------------------------+"
+			Escribir "|                        USUARIOS                          |"
+			Escribir "+----------------------------------------------------------+"
+			Escribir ""
+			Escribir "Ingrese el ID del usuario a eliminar"
+			Leer datusuario
+			datusuario <- Mayusculas(datusuario)
+			Repetir
+				Para i <- 0 Hasta cantidadUsuarios -1 Con Paso 1 Hacer
+					Si idUsuario[i] = datusuario Entonces
+						verificador <- Verdadero
+						pos3 <- i
 					FinSi
 				FinPara
-				Si pos <> 0 Entonces
-					Para i <- pos Hasta cantTrabajadores-1 Hacer
-						Para j <- 0 Hasta 2 Hacer
-							trabajadores(i,j) <- trabajadores(i+1,j)
-						FinPara
-					FinPara
-					Para i <- pos Hasta cantTrabajadores-1 Hacer
-						temp <- ConvertirANumero(Subcadena(trabajadores(i,0), 2, Longitud(trabajadores(i,0))))
-						Si temp < 10 Entonces
-							trabajadores(i,0) <- "T0" + ConvertirATexto(temp-1)
-						SiNo
-							trabajadores(i,0) <- "T" + ConvertirATexto(temp-1)
-						FinSi
-					FinPara
-					Para j <- 0 Hasta 2 Hacer
-						trabajadores(cantTrabajadores,j) <- ""
-					FinPara
-					cantTrabajadores <- cantTrabajadores-1
+				i<-cantidadUsuarios-1
+				Si verificador = Falso Entonces
+					Escribir "El usuario no existe, intente de nuevo por favor"
+					Leer datusuario
+					datusuario <- Mayusculas(datusuario)
 				FinSi
-			SiNo
-				Escribir "No hay ningun trabajador actualmente."
-				Escribir "Presione una tecla"
-				Esperar Tecla
-				asegurar <- "N"
-				Borrar Pantalla
-			FinSi
+			Hasta Que verificador = Verdadero
+			idUsuario[pos3] <-""
+			nombreUsuario[pos3] <- ""
+			contraseñaUsuario[pos3] <- ""
+			rolUsuario[pos3] <- ""
+			cantidadUsuarios <- cantidadUsuarios  - 1
 		FinSi
-	Hasta Que asegurar="N"
-FinSubProceso
-
-SubProceso menu(trabajadores,cantTrabajadores)
-	Definir verif Como Caracter
-	Definir i, j Como Entero
-	Escribir "+----------------------------------------------------------+"
-	Escribir "|                      TRABAJADORES                        |"
-	Escribir "+----------------------------------------------------------+"
-	Escribir ""
-	Repetir
-		Escribir "Quieres ver los trabajadores actuales? S/N"
-		leer verif
-		verif<-Mayusculas(verif)
-		si(verif<>"S" y verif<>"N") entonces
-			Repetir
-				Escribir "No ingreso la opcion correcta, vuelvalo a hacer"
-				leer verif
-				verif<-mayusculas(verif)
-			Hasta Que verif="S" o verif="N"
-		FinSi
-		si (verif="S") entonces
-			Para i<-1 hasta cantTrabajadores con paso 1 hacer
-				Escribir "Trabajador numero ",i,"Â°"
-				Para j<-0 hasta 2 con paso 1 hacer
-					Escribir trabajadores(i,j)
-				FinPara
-			FinPara
-		FinSi
-	hasta que verif="S" o verif="N"
+		Hasta Que asegurar="N"
 FinSubProceso
 
 // ==========================================================
@@ -1201,10 +1223,10 @@ SubProceso asignarTrabajadores(idMision, tipoMision, provinciaMision, prioridadM
 	FinSi
 FinSubProceso
 
-// ======================================= Stock
+// ======================================= Función para ver stock
 SubProceso gestionarStock(stockId, stockNombre, stockCategoria, stockCantidad, stockUnidad, stockEstado, totalStock Por Referencia, acumuladoDonaciones Por Referencia)
 	Definir opStock, filaMod, j, cantCompra, costoUnitario, costoTotal Como Entero
-	Definir nuevoEstado Como Caracter
+	Definir nuevoEstado Como Cadena
 	
 	Repetir
 		Borrar Pantalla
@@ -1317,23 +1339,27 @@ FinSubProceso
 //                        COLABORADOR
 // ==========================================================
 
-//FALTA - Unificar la parte de colaboradores, usando vectores
-SubProceso colaborador(idUsuario, matrizMisiones, cantidadMisiones)
+SubProceso colaborador(idColaborador, idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, cantidadMisiones, stockId, stockNombre, stockCantidad Por Referencia, stockUnidad, totalStock, acumuladoDonaciones Por Referencia, donacionesPorMision)
 	Definir opcion Como Entero
+	Limpiar Pantalla
+	Repetir
 	Escribir "======================================"
-	Escribir "          COLABORADORES"
+	Escribir "         PANEL DE COLABORADORES"
 	Escribir "======================================"
-	Escribir "1. Ver misiones publicas"
-	Escribir ""
-	Escribir "2. Salir"
+	Escribir "ID: ", idColaborador
+	Escribir " [1] Ver misiones disponibles"
+	Escribir " [2] Donar insumos"
+	Escribir " [3] Cerrar sesion"
 	Escribir "======================================"
 	Escribir "Ingrese una opcion: "
 	Leer opcion
 	
 	Segun opcion Hacer
 		1:
-			verMisionesPublicas(matrizMisiones, cantidadMisiones)
+			verMisionesDisponibles(idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, cantidadMisiones, donacionesPorMision)
 		2:
+			donarInsumos(idColaborador, stockId, stockNombre, stockCantidad, stockUnidad, totalStock)	
+		3:
 			Escribir "Saliendo del menu de colaborador..."
 		De Otro Modo:
 			Escribir "[ERROR] La opcion ingresada no es valida." 
@@ -1342,47 +1368,106 @@ SubProceso colaborador(idUsuario, matrizMisiones, cantidadMisiones)
 			Escribir "Presione una tecla para continuar..." 
 			Esperar Tecla
 	FinSegun
-	
+	Hasta que opcion = 3 
 FinSubProceso
 
-Funcion verMisionesPublicas(matrizMisiones, cantidadMisiones)
+Funcion verMisionesDisponibles(idMision, tipoMision, provinciaMision, localidadMision, descripcionMision, prioridadMision, estadoMision, cantidadMisiones, donacionesPorMision)
 	Definir i Como Entero
-	Definir hayPublicas Como Logico
 	
-	i <- 1
-	hayPublicas <- Falso
 	Limpiar Pantalla
 	Escribir "========================================"
-	Escribir "     MISIONES PUBLICAS DISPONIBLES      "
+	Escribir "          MISIONES DISPONIBLES      "
 	Escribir "========================================"
-	
-	// En base 1, iteramos desde 1 hasta cantidadMisiones
-	Para i <- 1 Hasta cantidadMisiones Hacer
-		// Columna 3 contiene la Visibilidad ("Publica" / "Privada")
-		Si Mayusculas(matrizMisiones[i, 3]) = "PUBLICA" Entonces
-			Escribir "ID Mision : ", matrizMisiones[i, 1]
-			Escribir "Titulo    : ", matrizMisiones[i, 2]
-			Escribir "Estado    : ", matrizMisiones[i, 4]
-			Escribir "---------------------------------------------"
-			hayPublicas <- Verdadero
+	Para i <- 0 Hasta cantidadMisiones - 1 Hacer
+		Si estadoMision[i] <> "Controlada" Entonces
+			Escribir idMision[i], " | ", tipoMision[i], " | ", provinciaMision[i], " | Urgencia: ", prioridadMision[i], " | Fondos asignados: $", donacionesPorMision[i] 
 		FinSi
 	FinPara
-	
-	Si NO hayPublicas Entonces
-		Escribir "No hay misiones publicas disponibles en este momento."
-		Escribir "" 
-		Escribir "Presione una tecla para continuar..." 
-		Esperar Tecla
-	FinSi
+	Escribir ""
+	Escribir "Presione cualquier tecla para continuar..."
+	Esperar Tecla
 FinFuncion
 
+SubProceso donarInsumos(idColaborador, stockId, stockNombre, stockCantidad Por Referencia, stockUnidad, totalStock)
+	
+    Definir opcionInsumo, cantidadDonada, i Como Entero
+	
+    Limpiar Pantalla
+	
+    Escribir "+----------------------------------------------------------+"
+    Escribir "|                     DONAR INSUMOS                        |"
+    Escribir "+----------------------------------------------------------+"
+	
+    Si totalStock = 0 Entonces
+		
+        Escribir "No hay insumos registrados en el sistema."
+		
+    SiNo
+		
+        Escribir "Seleccione el insumo que desea donar:"
+        Escribir ""
+		
+        Para i <- 1 Hasta totalStock Con Paso 1 Hacer
+            Escribir "[", i, "] ", stockNombre[i], " | Stock actual: ", stockCantidad[i], " ", stockUnidad[i]
+        FinPara
+		
+        Escribir "[0] Cancelar"
+        Escribir ""
+        Escribir "Seleccione una opcion: "
+        Leer opcionInsumo
+		
+        Si opcionInsumo >= 1 Y opcionInsumo <= totalStock Entonces
+			
+            Escribir ""
+            Escribir "Insumo seleccionado: ", stockNombre[opcionInsumo]
+            Escribir "Ingrese la cantidad que desea donar: "
+            Leer cantidadDonada
+			
+            Si cantidadDonada > 0 Entonces
+				
+                stockCantidad[opcionInsumo] <- stockCantidad[opcionInsumo] + cantidadDonada
+				
+                Escribir ""
+                Escribir "+----------------------------------------------------------+"
+                Escribir "|                 DONACION REGISTRADA                      |"
+                Escribir "+----------------------------------------------------------+"
+                Escribir "| Colaborador : ", idColaborador
+                Escribir "| Insumo      : ", stockNombre[opcionInsumo]
+                Escribir "| Cantidad    : ", cantidadDonada, " ", stockUnidad[opcionInsumo]
+                Escribir "| Nuevo stock : ", stockCantidad[opcionInsumo], " ", stockUnidad[opcionInsumo]
+                Escribir "+----------------------------------------------------------+"
+				
+            SiNo
+				
+                Escribir "[ERROR] La cantidad debe ser mayor a cero."
+				
+            FinSi
+			
+        SiNo
+			
+            Si opcionInsumo <> 0 Entonces
+                Escribir "[ERROR] El numero de insumo seleccionado no es valido."
+            SiNo
+                Escribir "Donacion cancelada."
+            FinSi
+			
+        FinSi
+		
+    FinSi
+	
+    Escribir ""
+    Escribir "Presione una tecla para continuar..."
+    Esperar Tecla
+	
+FinSubProceso
 // ==========================================================
 //                        FINANZAS
 // ==========================================================
 
-SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, tipoMision, provinciaMision, estadoMision, cantidadMisiones, donacionesPorMision)
-	Definir opFinanzas, monto, cantDistribuir, i, posMision, totalDistribuido Como Entero
-	Definir idMisionDestino, confirmacion Como Caracter
+SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, tipoMision, estadoMision, cantidadMisiones, donacionesPorMision)
+	Definir opFinanzas, monto, cantDistribuir como Entero
+	Definir i, posMision, totalDistribuido Como Entero
+	Definir idMisionDestino, confirmacion Como Cadena
 	
 	Repetir
 		Limpiar Pantalla
@@ -1411,13 +1496,13 @@ SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, ti
 					Escribir "No hay misiones registradas."
 				SiNo
 					Para i <- 0 Hasta cantidadMisiones - 1 Con Paso 1 Hacer
-						Escribir idMision[i], " | ", tipoMision[i], " | ", estadoMision[i], " | Recibido: $", donacionesPorMision[i]
+						Escribir idMision[i], " | ", tipoMision[i], " | Estado: ", estadoMision[i], " | Recibido: $", donacionesPorMision[i]
 						totalDistribuido <- totalDistribuido + donacionesPorMision[i]
 					FinPara
 				FinSi
 				Escribir "-----------------------------------------------------"
-				Escribir "Total ya distribuido: $", totalDistribuido
-				Escribir "Total recaudado (distribuido + pendiente): $", totalDistribuido + acumuladoDonaciones
+				Escribir "Total ya distribuido: ", totalDistribuido
+				Escribir "Total recaudado (distribuido + pendiente): ", totalDistribuido + acumuladoDonaciones
 				Escribir ""
 				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
@@ -1429,9 +1514,9 @@ SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, ti
 				Leer monto
 				Si monto > 0 Entonces
 					acumuladoDonaciones <- acumuladoDonaciones + monto
-					Escribir "[OK] Donacion registrada. Fondos disponibles: $", acumuladoDonaciones
+					Escribir "[OK] Donacion registrada. Fondos disponibles: ", acumuladoDonaciones
 				SiNo
-					Escribir "[ERROR] El monto debe ser mayor a 0."
+					Escribir "[ERROR!] El monto debe ser mayor a 0."
 				FinSi
 				Escribir ""
 				Escribir "Presione una tecla para continuar..."
@@ -1446,13 +1531,13 @@ SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, ti
 					Si cantidadMisiones = 0 Entonces
 						Escribir "No hay misiones registradas."
 					SiNo
-						Escribir "Fondos disponibles: $", acumuladoDonaciones
+						Escribir "Fondos disponibles: ", acumuladoDonaciones
 						Escribir ""
 						Escribir "MISIONES ACTIVAS:"
 						Escribir "-----------------------------------------------------"
-						Para i <- 1 Hasta cantidadMisiones Con Paso 1 Hacer
+						Para i <- 0 Hasta cantidadMisiones - 1 Con Paso 1 Hacer
 							Si estadoMision[i] <> "Controlada" Entonces
-								Escribir idMision[i], " | ", tipoMision[i], " | ", provinciaMision[i], " | Recibido: $", donacionesPorMision[i]
+								Escribir idMision[i], " | ", tipoMision[i], " | ", estadoMision[i], " | Recibido: ", donacionesPorMision[i]
 							FinSi
 						FinPara
 						Escribir "-----------------------------------------------------"
@@ -1460,7 +1545,7 @@ SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, ti
 						Leer idMisionDestino
 						idMisionDestino <- Mayusculas(idMisionDestino)
 						
-						// busca la mision (solo las activas)
+						// busca la mision -> (solo las activas)
 						posMision <- -1
 						Para i <- 0 Hasta cantidadMisiones - 1 Con Paso 1 Hacer
 							Si idMision[i] = idMisionDestino Y estadoMision[i] <> "Controlada" Entonces
@@ -1469,18 +1554,18 @@ SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, ti
 						FinPara
 						
 						Si posMision = -1 Entonces
-							Escribir "[ERROR] La mision no existe o ya esta controlada."
+							Escribir "[ERROR!] La mision no existe o ya esta controlada."
 						SiNo
 							Escribir "Cantidad a enviar a ", idMisionDestino, " (maximo ", acumuladoDonaciones, "): "
 							Leer cantDistribuir
 							
 							Si cantDistribuir > 0 Y cantDistribuir <= acumuladoDonaciones Entonces
 								Repetir
-									Escribir "Confirmar envio de $", cantDistribuir, " a ", idMisionDestino, "? (S/N): "
+									Escribir "Confirmar envio de ", cantDistribuir, " a ", idMisionDestino, "? (S/N): "
 									Leer confirmacion
 									confirmacion <- Mayusculas(confirmacion)
 									Si confirmacion <> "S" Y confirmacion <> "N" Entonces
-										Escribir "[ERROR] Opcion invalida. Debe ingresar S o N."
+										Escribir "[ERROR!] Opcion invalida. Debe ingresar S o N."
 									FinSi
 								Hasta Que confirmacion = "S" O confirmacion = "N"
 								
@@ -1488,14 +1573,14 @@ SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, ti
 									acumuladoDonaciones <- acumuladoDonaciones - cantDistribuir
 									donacionesPorMision[posMision] <- donacionesPorMision[posMision] + cantDistribuir
 									Escribir ""
-									Escribir "[OK] Se enviaron $", cantDistribuir, " a la mision ", idMisionDestino
-									Escribir "La mision ya acumula: $", donacionesPorMision[posMision]
-									Escribir "Fondos restantes en Finanzas: $", acumuladoDonaciones
+									Escribir "[OK] Se enviaron ", cantDistribuir, " a la mision ", idMisionDestino
+									Escribir "La mision ya acumula: ", donacionesPorMision[posMision]
+									Escribir "Fondos restantes en Finanzas: ", acumuladoDonaciones
 								SiNo
 									Escribir "[X] Distribucion cancelada."
 								FinSi
 							SiNo
-								Escribir "[ERROR] Cantidad invalida o supera los fondos disponibles."
+								Escribir "[ERROR!] Cantidad invalida o supera los fondos disponibles."
 							FinSi
 						FinSi
 					FinSi
@@ -1510,7 +1595,7 @@ SubProceso finanzas(idFinanzas, acumuladoDonaciones Por Referencia, idMision, ti
 				Esperar 1 Segundos
 				
 			De Otro Modo:
-				Escribir "Opcion invalida."
+				Escribir "[ERROR] Opcion invalida."
 				Escribir "Presione una tecla para continuar..."
 				Esperar Tecla
 		FinSegun
