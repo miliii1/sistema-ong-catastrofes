@@ -710,7 +710,6 @@ SubProceso administrador(idRolUsuario, idUsuario, nombreUsuario, contraseñaUsuar
         Esperar Tecla
 	SiNo
 		Repetir
-			//FALTA - Buscar el ID del administrador y la posicion del vector (Muestra el nombre y apellido pero en la posicion del usuario, no del administrador)
 			Limpiar Pantalla
 			Escribir "======================================"
 			Escribir "          ADMINISTRADORES"
