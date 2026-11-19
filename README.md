@@ -62,8 +62,8 @@ organización durante una crisis.
 > Actualizado al *29/10/2026*
 
 - 🔄 **Coordinador** -- Finalizado.
-- 🔄 **Administrador** -- en desarrollo: *[qué falta]*
-- 🔄 **Trabajador** -- en desarrollo: Verificar y controlar el estado de la misión.
+- 🔄 **Administrador** -- Finalizado.
+- 🔄 **Trabajador** -- Finalizado.
 - 🔄 **Finanzas** -- Finalizado.
 - ⬜ **Colaborador** -- en desarrollo: *FuncMostrarMisiónesPúblicas*
 
